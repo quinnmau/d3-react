@@ -6,17 +6,20 @@ const data = [
   {
     id: 1,
     name: 'steve',
-    freq: 13
+    freq: 13,
+    freq2: 15
   },
   {
     id: 2,
     name: 'earl',
-    freq: 5
+    freq: 5,
+    freq2: 26
   },
   {
     id: 3,
     name: 'jimi',
-    freq: 22
+    freq: 22,
+    freq2: 11
   }
 ];
 
@@ -45,16 +48,17 @@ class App extends React.Component {
   }
 
   render() {
-    setTimeout(() => {
-      this.setState({data: data2});
-    }, 5000);
+    // setTimeout(() => {
+    //   this.setState({data: data2});
+    // }, 5000);
     return (
       <div>
         <ColumnChart data={this.state.data}
                      width={500}
                      height={500}
                      xVal={'name'}
-                     yVal={'freq'}
+                     yVal={['freq', 'freq2']}
+                     title={'Attendence Frequences for HCDE 318 Spring 15'}
         />
         <button onClick={this.update}>click me</button>
       </div>

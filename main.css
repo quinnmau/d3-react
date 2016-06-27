@@ -5,10 +5,15 @@ body {
 
 .axis path, .axis line {
   fill: none;
-  stroke: #CED2D4;
+  stroke: #8eafbf;
   shape-rendering: crispEdges;
 }
 
-/*.axis text {
-  fill: #CED2D4;
-}*/
+.axis text {
+  fill: #8eafbf;
+  stroke: none;
+}
+
+svg {
+  border: 1px solid black;
+}
