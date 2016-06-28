@@ -61,17 +61,15 @@ class ColumnChart extends React.Component {
     const xValues = this.props.yVal.map(d => {return d});
     const xScale = d3.scale.ordinal().domain(xValues).rangeRoundBands([0, groupScale.rangeBand()]);
 
-    //y scale
-    const yValues = [];
+    //format data to make groups of bars
     data.forEach(d => {
-      for (var item in d) {
-        if (xValues.indexOf(item) !== -1) {
-          yValues.push(d[item]);
-        }
-      }
+      d.groupDetails = xValues.map(name => {return {name: name, value: +d[name]}});
     });
-    const yMax = d3.max(yValues);
-    const yScale = d3.scale.linear().domain([0, yMax]).range([innerH, 0]);
+
+    //y scale
+    const yScale = d3.scale.linear()
+                    .domain([0, d3.max(data, d => {return d3.max(d.groupDetails, d => {return d.value})})])
+                    .range([innerH, 0]);
 
     //set axes
     const xAxis = d3.svg.axis().orient('bottom').scale(groupScale);
@@ -90,22 +88,21 @@ class ColumnChart extends React.Component {
 
     const g = svg.select('.gEnter');
 
-    const groups = svg.selectAll('.groups').data(data);
+    const groups = g.selectAll('.groups').data(data);
 
     groups.enter().append('g')
             .attr('class', 'groups')
             .attr('transform', d => {return 'translate(' + groupScale(d[this.props.xVal]) + ', 0)'});
 
-    const bars = g.selectAll('rect').data(data);
+    const bars = groups.selectAll('rect').data(d => {return d.groupDetails});
 
-    //TODO: position bars in groups!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     bars.enter().append('rect')
-        .attr('x', d => {return xScale(d[this.props.xVal])})
-        .attr('y', d => {return yScale(d[this.props.yVal])})
+        .attr('x', d => {return xScale(d.name)})
+        .attr('y', d => {return yScale(d.value)})
         .attr('class', 'bars')
         .attr('width', xScale.rangeBand())
-        .attr('height', d => {return (innerH - yScale(d[this.props.yVal]))})
-        .attr('fill', '#25b4ff');
+        .attr('height', d => {return (innerH - yScale(d.value))})
+        .attr('fill', d => {return color(d.name)});
 
     bars.on('mouseover', function() {
       bars.attr('opacity', 0.5);
@@ -128,6 +125,7 @@ class ColumnChart extends React.Component {
       right: 100,
       top: 50
     };
+    const color = d3.scale.ordinal().range(['#25b4ff', '#37dad3', '#fd810e', '#ffcf3z']);
     const innerW = width - margin.left - margin.right;
     const innerH = height - margin.top - margin.bottom;
 
@@ -138,15 +136,22 @@ class ColumnChart extends React.Component {
     const svg = cont.selectAll('svg');
 
     //update scales
-    const xValues = data.map(d => {return d[this.props.xVal]});
-    const xScale = d3.scale.ordinal().rangeBands([0, innerW], 0.33).domain(xValues);
+    const xGroups = data.map(d => {return d[this.props.xVal]});
+    const groupScale = d3.scale.ordinal().rangeRoundBands([0, innerW], 0.2).domain(xGroups);
 
-    //corret this.props.yVal[0] to position i in array
-    const yMax = d3.max(data, d => {return d[this.props.yVal[0]]});
-    const yScale = d3.scale.linear().domain([0, yMax]).range([innerH, 0]);
+    const xValues = this.props.yVal.map(d => {return d});
+    const xScale = d3.scale.ordinal().domain(xValues).rangeRoundBands([0, groupScale.rangeBand()]);
+
+    data.forEach(d => {
+      d.groupDetails = xValues.map(name => {return {name: name, value: +d[name]}});
+    });
+
+    const yScale = d3.scale.linear()
+                    .domain([0, d3.max(data, d => {return d3.max(d.groupDetails, d => {return d.value})})])
+                    .range([innerH, 0]);
 
     //update axes
-    const xAxis = d3.svg.axis().orient('bottom').scale(xScale);
+    const xAxis = d3.svg.axis().orient('bottom').scale(groupScale);
     const yAxis = d3.svg.axis().orient('left').scale(yScale);
 
     svg.select('.x').attr('transform', 'translate(' + 0 + ', ' + innerH + ')')
@@ -160,17 +165,40 @@ class ColumnChart extends React.Component {
     //update bars
     const g = svg.select('.gEnter');
 
-    const bars = g.selectAll('rect').data(data);
+    const groups = g.selectAll('.groups').data(data);
+
+    groups.exit().remove();
+
+    groups.transition().duration(1000)
+            .attr('transform', d => {return 'translate(' + groupScale(d[this.props.xVal]) + ', 0)'});
+
+    const bars = groups.selectAll('rect').data(d => {return d.groupDetails});
 
     bars.exit().remove();
 
+    bars.enter().append('rect')
+        .attr('height', 0)
+        .attr('y', innerH)
+        .attr('fill', '#fff')
+        .attr('opacity', 0);
+
     bars.transition().duration(1000)
-        .attr('x', d => {return xScale(d[this.props.xVal])})
-        .attr('y', d => {return yScale(d[this.props.yVal])})
-        .attr('class', 'bars')
-        .attr('width', xScale.rangeBand())
-        .attr('height', d => {return (innerH - yScale(d[this.props.yVal]))})
-        .attr('fill', '#25b4ff');
+      .attr('x', d => {return xScale(d.name)})
+      .attr('y', d => {return yScale(d.value)})
+      .attr('class', 'bars')
+      .attr('width', xScale.rangeBand())
+      .attr('height', d => {return (innerH - yScale(d.value))})
+      .attr('opacity', 1)
+      .attr('fill', d => {return color(d.name)});
+
+      bars.on('mouseover', function() {
+        bars.attr('opacity', 0.5);
+        d3.select(this).attr('opacity', 1.0);
+      });
+
+      bars.on('mouseout', function() {
+        bars.attr('opacity', 1.0);
+      });
   }
 
   //exit remove
