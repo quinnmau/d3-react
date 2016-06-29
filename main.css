@@ -17,3 +17,8 @@ body {
 svg {
   border: 1px solid black;
 }
+
+.title {
+  font-size: 26px;
+  fill: #3a4f5a;
+}

@@ -49,13 +49,6 @@ class App extends React.Component {
   }
 
   render() {
-    setTimeout(() => {
-      this.setState(
-        {data: data2,
-         yVal: ['freq', 'freq2']
-        }
-      );
-    }, 5000);
     return (
       <div>
         <ColumnChart data={this.state.data}
@@ -63,9 +56,22 @@ class App extends React.Component {
                      height={500}
                      xVal={'name'}
                      yVal={this.state.yVal}
-                     title={'Attendence Frequences for HCDE 318 Spring 15'}
+                     title={'Frequency of Students'}
         />
-        <button onClick={this.update}>click me</button>
+        <button onClick={() => {
+          this.setState(
+            {data: data2,
+             yVal: ['freq', 'freq2']
+            }
+          );
+        }}>click me</button>
+        <button onClick={() => {
+          this.setState(
+            {data: data,
+             yVal: ['freq']
+            }
+          );
+        }}>click me</button>
       </div>
     );
   }
