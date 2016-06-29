@@ -45,26 +45,20 @@ const data = [
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {data: data,
-    yVal: ['freq']};
+    this.state = {data: data2,
+    yVal: ['freq', 'freq2']};
   }
 
   render() {
     return (
       <div>
-        <ColumnChart data={this.state.data}
-                     width={500}
-                     height={500}
-                     xVal={'name'}
-                     yVal={this.state.yVal}
-                     title={'Frequency of Students'}
-        />
+
 
         <BarChart data={this.state.data}
                      width={500}
                      height={500}
-                     yVal={'name'}
-                     xVal={this.state.yVal}
+                     xVal={'name'}
+                     yVal={this.state.yVal}
                      title={'Frequency of Students'}
         />
 
@@ -86,5 +80,13 @@ class App extends React.Component {
     );
   }
 }
+
+// <ColumnChart data={this.state.data}
+//              width={500}
+//              height={500}
+//              xVal={'name'}
+//              yVal={this.state.yVal}
+//              title={'Frequency of Students'}
+// />
 
 ReactDOM.render(<App />, document.getElementById('app'));

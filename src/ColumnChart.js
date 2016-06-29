@@ -180,7 +180,7 @@ class ColumnChart extends React.Component {
     groups.transition().duration(1000)
             .attr('transform', d => {return 'translate(' + groupScale(d[this.props.xVal]) + ', 0)'});
 
-    const bars = groups.selectAll('rect').data(d => {return d.groupDetails});
+    const bars = groups.selectAll('rect').data(data, d => {return d.groupDetails});
 
     //make bars transition out!!!!!!!!!!!!!!!!
     bars.exit().transition().duration(1000).attr('height', 0).attr('y', innerH).remove();

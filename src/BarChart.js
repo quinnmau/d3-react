@@ -17,8 +17,8 @@ class BarChart extends React.Component {
       margin: {top: 75, left: 60, bottom: 40, right: 100},
       data: this.props.data,
       title: this.props.title,
-      xVal: this.props.xVal,
-      yVal: this.props.yVal
+      xVal: this.props.yVal,
+      yVal: this.props.xVal
     };
   }
 
@@ -58,11 +58,31 @@ class BarChart extends React.Component {
 
     /*---------------set scales --------------------*/
     console.log(globals.data);
+    //group scale
+    const yGroups = globals.data.map(d => {return d[globals.yVal]});
+    const groupScale = this.getGroupScale(innerH).domain(yGroups);
 
-    const xScale = this.getXScale(innerW).domain([0, d3.max(globals.data, d => {return d[globals.xVal]})]);
+    //within group scale
+    const yValues = globals.xVal.map(d => {return d});
+    const yScale = d3.scale.ordinal().rangeRoundBands([groupScale.rangeBand(), 0])
+                                  .domain(yValues);
 
-    const yValues = globals.data.map(d => {return d[globals.yVal]});
-    const yScale = this.getYScale(innerH).domain(yValues);
+    // globals.data.forEach(d => {
+    //   d.groupDetails = yValues.map(name => {return name: name, value: +d[name]});
+    // });
+    console.log(yValues);
+    globals.data.forEach(function(d) {
+      d.groupDetails = yValues.map(function(a) {
+        return {name: a, value: d[a]};
+      });
+    });
+
+    const xScale = this.getXScale(innerW).domain([0, d3.max(globals.data, d => {
+      return d3.max(d.groupDetails, d => {
+        return d.value;
+      });
+    })]);
+
 
     /*----------set axes --------------*/
     const xAxis = this.getXAxis(xScale);
@@ -71,7 +91,7 @@ class BarChart extends React.Component {
                        .duration(1000)
                        .call(xAxis);
 
-    const yAxis = this.getYAxis(yScale);
+    const yAxis = this.getYAxis(groupScale);
     gEnter.select('.y').transition()
                        .duration(1000)
                        .call(yAxis);
@@ -79,20 +99,39 @@ class BarChart extends React.Component {
     //reselect gEnter
     const g = svg.select('.gEnter');
 
-    //actual data bars
-    const bars = g.selectAll('rect').data(globals.data);
+    const groups = g.selectAll('.groups').data(globals.data);
+
+    groups.enter().append('g')
+          .attr('class', 'groups')
+          .attr('transform', d => {return 'translate(0, ' + groupScale(d[globals.yVal]) + ')'});
+
+    // //actual data bars
+    const bars = groups.selectAll('rect').data(d => {return d.groupDetails});
+
+    console.log(groups);
 
     bars.enter().append('rect')
         .attr('x', 0)
-        .attr('y', d => {return yScale(d[globals.yVal])})
+        .attr('y', d => {return yScale(d.name)})
         .attr('width', 0)
-        .attr('height', yScale.rangeBand())
-        .attr('fill', d => {return color(d[globals.yVal])});
+        .attr('height', yScale.rangeBand());
+
+
+    bars.attr('fill', d => {return color(d.name)});
+
+    bars.on('mouseover', function() {
+      bars.attr('opacity', 0.5);
+      d3.select(this).attr('opacity', 1.0);
+    });
+
+    bars.on('mouseout', function() {
+      bars.attr('opacity', 1.0);
+    });
 
     bars.exit().remove();
 
     bars.transition().duration(1000)
-        .attr('width', d => {return xScale(d[globals.xVal])});
+        .attr('width', d => {return xScale(d.value)});
   }
 
   //updates chart
@@ -116,8 +155,14 @@ class BarChart extends React.Component {
     return d3.scale.linear().range([0, w]);
   }
 
-  //returns y scale without domain
-  getYScale(h) {
+  //returns y scale without domain or range for individual bars
+  //within groups
+  getYScale() {
+    return d3.scale.ordinal();
+  }
+
+  //scale for groups without domain
+  getGroupScale(h) {
     return d3.scale.ordinal().rangeRoundBands([h, 0], 0.2);
   }
 
