@@ -8,19 +8,22 @@ const data2 = [
     id: 1,
     name: 'steve',
     freq: 24,
-    freq2: 15
+    freq2: 15,
+    freq3: 36
   },
   {
     id: 2,
     name: 'earl',
     freq: 22,
-    freq2: 26
+    freq2: 26,
+    freq3: 27
   },
   {
     id: 3,
     name: 'jimi',
     freq: 5,
-    freq2: 11
+    freq2: 11,
+    freq3: 21
   }
 ];
 
@@ -46,7 +49,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {data: data2,
-    yVal: ['freq', 'freq2']};
+    yVal: ['freq', 'freq2', 'freq3']};
   }
 
   render() {

@@ -23,7 +23,7 @@ class ColumnChart extends React.Component {
       right: 100,
       top: 75
     };
-    const color = d3.scale.ordinal().range(['#25b4ff', '#37dad3', '#fd810e', '#ffcf3z']);
+    const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#ffcf3z']);
     const innerW = width - margin.left - margin.right;
     const innerH = height - margin.top - margin.bottom;
 
@@ -122,6 +122,33 @@ class ColumnChart extends React.Component {
     bars.on('mouseout', function() {
       bars.attr('opacity', 1.0);
     });
+
+    const legend = g.selectAll('.legend').data(xValues);
+
+    legend.enter().append('rect')
+          .attr('transform', function(d, i) {return 'translate(0, ' + (i * 25) + ')'})
+          .attr('x', innerW + 25)
+          .attr('width', 20)
+          .attr('height', 20)
+          .attr('class', 'legend')
+          .attr('fill', d => {return color(d)})
+          .attr('opacity', 0);
+
+    legend.transition().duration(1000).attr('opacity', 1);
+
+    const words = g.selectAll('.legend-text').data(xValues);
+
+    words.enter().append('text')
+          .attr('transform', function(d, i) {return 'translate(0, ' + (i * 25) + ')'})
+          .attr('x', innerW + 50)
+          .attr('y', 9)
+          .attr('dy', '.35em')
+          .style('text-anchor', 'start')
+          .text(d => {return d})
+          .attr('class', 'legend-text')
+          .attr('opacity', 0);
+
+    words.transition().duration(1000).attr('opacity', 1);
   }
 
   //update
@@ -135,7 +162,7 @@ class ColumnChart extends React.Component {
       right: 100,
       top: 75
     };
-    const color = d3.scale.ordinal().range(['#25b4ff', '#37dad3', '#fd810e', '#ffcf3z']);
+    const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#ffcf3z']);
     const innerW = width - margin.left - margin.right;
     const innerH = height - margin.top - margin.bottom;
 
@@ -181,7 +208,6 @@ class ColumnChart extends React.Component {
             .attr('transform', d => {return 'translate(' + groupScale(d[this.props.xVal]) + ', 0)'});
 
     const bars = groups.selectAll('rect').data(d => {return d.groupDetails});
-    console.log(data);
 
     //make bars transition out!!!!!!!!!!!!!!!!
     bars.exit().transition().duration(1000).attr('height', 0).attr('y', innerH).remove();
@@ -208,6 +234,43 @@ class ColumnChart extends React.Component {
       bars.on('mouseout', function() {
         bars.attr('opacity', 1.0);
       });
+
+      const legend = g.selectAll('.legend').data(xValues);
+
+      legend.exit().transition().duration(1000).attr('opacity', 0).remove();
+
+      legend.enter().append('rect')
+            .attr('fill', d => {return color(d)})
+            .attr('opacity', 0)
+            .attr('transform', 'translate(0, 100)');
+
+      legend.transition().duration(1000)
+            .attr('transform', function(d, i) {return 'translate(0, ' + (i * 25) + ')'})
+            .attr('x', innerW + 25)
+            .attr('width', 20)
+            .attr('height', 20)
+            .attr('class', 'legend')
+            .attr('fill', d => {return color(d)})
+            .attr('opacity', 1);
+
+      const words = g.selectAll('.legend-text').data(xValues);
+
+      words.exit().transition().duration(1000).attr('opacity', 0).remove();
+
+      words.enter().append('text')
+            .text(d => {return d})
+            .attr('opacity', 0)
+            .attr('transform', 'translate(0, 100)');
+
+      words.transition().duration(1000)
+            .attr('transform', function(d, i) {return 'translate(0, ' + (i * 25) + ')'})
+            .attr('x', innerW + 50)
+            .attr('y', 9)
+            .attr('dy', '.35em')
+            .style('text-anchor', 'start')
+            .text(d => {return d})
+            .attr('class', 'legend-text')
+            .attr('opacity', 1);
   }
 
   //exit remove

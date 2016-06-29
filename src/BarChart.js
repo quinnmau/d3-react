@@ -26,7 +26,7 @@ class BarChart extends React.Component {
   componentDidMount() {
     //global variables
     const globals = this.globals();
-    const color = d3.scale.ordinal().range(['#25b4ff', '#37dad3', '#fd810e', '#ffcf3z']);
+    const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#ffcf3z']);
     const innerW = globals.width - globals.margin.left - globals.margin.right;
     const innerH = globals.height - globals.margin.top - globals.margin.bottom;
 
@@ -57,7 +57,6 @@ class BarChart extends React.Component {
     gEnter.append('text').attr('class', 'title').text(globals.title).attr('transform', 'translate(0, -25)');
 
     /*---------------set scales --------------------*/
-    console.log(globals.data);
     //group scale
     const yGroups = globals.data.map(d => {return d[globals.yVal]});
     const groupScale = this.getGroupScale(innerH).domain(yGroups);
@@ -104,8 +103,6 @@ class BarChart extends React.Component {
     // //actual data bars
     const bars = groups.selectAll('rect').data(d => {return d.groupDetails});
 
-    console.log(groups);
-
     bars.enter().append('rect')
         .attr('x', 0)
         .attr('y', d => {return yScale(d.name)})
@@ -134,7 +131,7 @@ class BarChart extends React.Component {
   componentDidUpdate() {
     //global variables
     const globals = this.globals();
-    const color = d3.scale.ordinal().range(['#25b4ff', '#37dad3', '#fd810e', '#ffcf3z']);
+    const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#ffcf3z']);
     const innerW = globals.width - globals.margin.left - globals.margin.right;
     const innerH = globals.height - globals.margin.top - globals.margin.bottom;
 
