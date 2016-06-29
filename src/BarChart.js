@@ -54,7 +54,7 @@ class BarChart extends React.Component {
     gEnter.append('g').attr('class', 'y axis');
 
     //add text for title
-    gEnter.append('text').attr('class', 'title');
+    gEnter.append('text').attr('class', 'title').text(globals.title).attr('transform', 'translate(0, -25)');
 
     /*---------------set scales --------------------*/
     console.log(globals.data);
@@ -67,10 +67,6 @@ class BarChart extends React.Component {
     const yScale = d3.scale.ordinal().rangeRoundBands([groupScale.rangeBand(), 0])
                                   .domain(yValues);
 
-    // globals.data.forEach(d => {
-    //   d.groupDetails = yValues.map(name => {return name: name, value: +d[name]});
-    // });
-    console.log(yValues);
     globals.data.forEach(function(d) {
       d.groupDetails = yValues.map(function(a) {
         return {name: a, value: d[a]};
@@ -141,6 +137,67 @@ class BarChart extends React.Component {
     const color = d3.scale.ordinal().range(['#25b4ff', '#37dad3', '#fd810e', '#ffcf3z']);
     const innerW = globals.width - globals.margin.left - globals.margin.right;
     const innerH = globals.height - globals.margin.top - globals.margin.bottom;
+
+    const cont = d3.select(ReactDOM.findDOMNode(this));
+    const svg = cont.selectAll('svg');
+    const gEnter = svg.select('.gEnter');
+
+    //update scales
+    const yGroups = globals.data.map(d => {return d[globals.yVal]});
+    const groupScale = this.getGroupScale(innerH).domain(yGroups);
+
+    const yValues = globals.xVal.map(d => {return d});
+    const yScale = d3.scale.ordinal().rangeRoundBands([groupScale.rangeBand(), 0])
+                                  .domain(yValues);
+
+    globals.data.forEach(function(d) {
+      d.groupDetails = yValues.map(function(a) {
+        return {name: a, value: d[a]};
+      });
+    });
+
+    const xScale = this.getXScale(innerW).domain([0, d3.max(globals.data, d => {
+      return d3.max(d.groupDetails, d => {
+        return d.value;
+      });
+    })]);
+    //
+    //update axes
+    const xAxis = this.getXAxis(xScale);
+    gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
+                       .transition()
+                       .duration(1000)
+                       .call(xAxis);
+
+    const yAxis = this.getYAxis(groupScale);
+    gEnter.select('.y').transition()
+                       .duration(1000)
+                       .call(yAxis);
+
+     //update groups and bars
+     const g = svg.select('.gEnter');
+
+     const groups = g.selectAll('.groups').data(globals.data);
+
+     groups.exit().remove();
+
+     groups.transition().duration(1000)
+           .attr('transform', d => {return 'translate(0, ' + groupScale(d[globals.yVal]) + ')'});
+
+     //actual data bars
+     const bars = groups.selectAll('rect').data(d => {return d.groupDetails});
+
+     bars.exit().transition()
+                .duration(1000)
+                .attr('width', 0);
+
+     bars.transition().duration(1000)
+         .attr('x', 0)
+         .attr('y', d => {return yScale(d.name)})
+         .attr('width', d => {return xScale(d.value)})
+         .attr('height', yScale.rangeBand());
+
+     bars.attr('fill', d => {return color(d.name)});
   }
 
   //removes chart

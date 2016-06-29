@@ -52,7 +52,13 @@ class App extends React.Component {
   render() {
     return (
       <div>
-
+        <ColumnChart data={this.state.data}
+                     width={500}
+                     height={500}
+                     xVal={'name'}
+                     yVal={this.state.yVal}
+                     title={'Frequency of Students'}
+        />
 
         <BarChart data={this.state.data}
                      width={500}
@@ -64,15 +70,15 @@ class App extends React.Component {
 
         <button onClick={() => {
           this.setState(
-            {data: data2,
-             yVal: ['freq', 'freq2']
+            {data: data,
+             yVal: ['freq']
             }
           );
         }}>click me</button>
         <button onClick={() => {
           this.setState(
-            {data: data,
-             yVal: ['freq']
+            {data: data2,
+             yVal: ['freq', 'freq2']
             }
           );
         }}>click me</button>
@@ -81,12 +87,6 @@ class App extends React.Component {
   }
 }
 
-// <ColumnChart data={this.state.data}
-//              width={500}
-//              height={500}
-//              xVal={'name'}
-//              yVal={this.state.yVal}
-//              title={'Frequency of Students'}
-// />
+
 
 ReactDOM.render(<App />, document.getElementById('app'));
