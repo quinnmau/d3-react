@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ColumnChart from './ColumnChart';
+import BarChart from './BarChart';
 
 const data2 = [
   {
@@ -58,6 +59,15 @@ class App extends React.Component {
                      yVal={this.state.yVal}
                      title={'Frequency of Students'}
         />
+
+        <BarChart data={this.state.data}
+                     width={500}
+                     height={500}
+                     yVal={'name'}
+                     xVal={this.state.yVal}
+                     title={'Frequency of Students'}
+        />
+
         <button onClick={() => {
           this.setState(
             {data: data2,
