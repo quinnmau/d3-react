@@ -14,7 +14,7 @@ class BarChart extends React.Component {
     return {
       width: this.props.width,
       height: this.props.height,
-      margin: {top: 75, left: 40, bottom: 40, right: 100},
+      margin: {top: 75, left: 60, bottom: 40, right: 100},
       data: this.props.data,
       title: this.props.title,
       xVal: this.props.xVal,
@@ -66,8 +66,33 @@ class BarChart extends React.Component {
 
     /*----------set axes --------------*/
     const xAxis = this.getXAxis(xScale);
+    gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
+                       .transition()
+                       .duration(1000)
+                       .call(xAxis);
 
     const yAxis = this.getYAxis(yScale);
+    gEnter.select('.y').transition()
+                       .duration(1000)
+                       .call(yAxis);
+
+    //reselect gEnter
+    const g = svg.select('.gEnter');
+
+    //actual data bars
+    const bars = g.selectAll('rect').data(globals.data);
+
+    bars.enter().append('rect')
+        .attr('x', 0)
+        .attr('y', d => {return yScale(d[globals.yVal])})
+        .attr('width', 0)
+        .attr('height', yScale.rangeBand())
+        .attr('fill', d => {return color(d[globals.yVal])});
+
+    bars.exit().remove();
+
+    bars.transition().duration(1000)
+        .attr('width', d => {return xScale(d[globals.xVal])});
   }
 
   //updates chart
@@ -93,7 +118,7 @@ class BarChart extends React.Component {
 
   //returns y scale without domain
   getYScale(h) {
-    return d3.scale.ordinal().range([h, 0]);
+    return d3.scale.ordinal().rangeRoundBands([h, 0], 0.2);
   }
 
   //MAKE SURE TO MAKE MORE SPECIFIC CLASSES FOR STYLING ONLY BAR CHART AXES
