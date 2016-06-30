@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 class StackedColumnChart extends React.Component {
   render() {
     return (
-      <div>
+      <div class="vis">
 
       </div>
     )

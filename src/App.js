@@ -49,7 +49,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {data: data2,
-    yVal: ['freq', 'freq2', 'freq3']};
+    yVal: ['freq']};
   }
 
   render() {
@@ -73,7 +73,7 @@ class App extends React.Component {
 
         <button onClick={() => {
           this.setState(
-            {data: data,
+            {data: data2,
              yVal: ['freq']
             }
           );
@@ -82,6 +82,13 @@ class App extends React.Component {
           this.setState(
             {data: data2,
              yVal: ['freq', 'freq2']
+            }
+          );
+        }}>click me</button>
+        <button onClick={() => {
+          this.setState(
+            {data: data2,
+             yVal: ['freq', 'freq2', 'freq3']
             }
           );
         }}>click me</button>

@@ -213,15 +213,19 @@ class BarChart extends React.Component {
 
      bars.exit().transition()
                 .duration(1000)
-                .attr('width', 0);
+                .attr('width', 0)
+                .remove();
 
-     bars.transition().duration(1000)
-         .attr('x', 0)
-         .attr('y', d => {return yScale(d.name)})
-         .attr('width', d => {return xScale(d.value)})
-         .attr('height', yScale.rangeBand());
+     bars.enter().append('rect')
+         .attr('width', 0);
 
      bars.attr('fill', d => {return color(d.name)});
+
+     bars.transition().duration(1000)
+          .attr('width', d => {return xScale(d.value)})
+          .attr('x', 0)
+          .attr('y', d => {return yScale(d.name)})
+          .attr('height', yScale.rangeBand());
 
      const legend = g.selectAll('.legend').data(yValues);
 
