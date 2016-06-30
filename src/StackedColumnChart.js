@@ -55,11 +55,11 @@ class StackedColumnChart extends React.Component {
     vars.data.forEach(d => {
       var y0 = 0;
       d.segments = vars.yVal.map(type => {return {name: type, y0: y0, y1: y0 += +d[type]};});
-      d.total = d.segments[d.segments.length - 1].y1;
+      d.segments.forEach(d => {d.y0 /= y0; d.y1 /= y0;});
     });
 
     //y scale
-    const yScale = this.getYScale(innerH).domain([0, d3.max(vars.data, d => {return +d.total})]);
+    const yScale = this.getYScale(innerH);
 
     /*---------------set axes-----------------------------*/
     const xAxis = d3.svg.axis().scale(xScale).orient('bottom');
@@ -67,7 +67,7 @@ class StackedColumnChart extends React.Component {
     gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
             .transition().duration(1000).call(xAxis);
 
-    const yAxis = d3.svg.axis().scale(yScale).orient('left');
+    const yAxis = d3.svg.axis().scale(yScale).orient('left').tickFormat(d3.format('.0%'));
 
     gEnter.select('.y').transition().duration(1000).call(yAxis);
     /*---------------make stacks----------------------------*/
@@ -163,7 +163,7 @@ class StackedColumnChart extends React.Component {
 
   //returns y scale without domain-- set that later
   getYScale(h) {
-    return d3.scale.linear().range([h, 0]);
+    return d3.scale.linear().rangeRound([h, 0]);
   }
 }
 
