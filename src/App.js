@@ -64,22 +64,6 @@ class App extends React.Component {
                      title={'Frequency of Students'}
         />
 
-        <BarChart data={this.state.data}
-                     width={500}
-                     height={500}
-                     xVal={'name'}
-                     yVal={this.state.yVal}
-                     title={'Frequency of Students'}
-        />
-
-        <StackedColumnChart data={this.state.data}
-                            width={500}
-                            height={500}
-                            xVal={'name'}
-                            yVal={this.state.stackVal}
-                            title={'Frequency of Students'}
-        />
-
         <button onClick={() => {
           this.setState(
             {data: data2,
@@ -101,6 +85,24 @@ class App extends React.Component {
             }
           );
         }}>click me</button>
+
+        <BarChart data={this.state.data}
+                     width={500}
+                     height={500}
+                     xVal={'name'}
+                     yVal={this.state.yVal}
+                     title={'Frequency of Students'}
+        />
+
+        <StackedColumnChart data={this.state.data}
+                            width={500}
+                            height={500}
+                            xVal={'name'}
+                            yVal={this.state.stackVal}
+                            title={'Frequency of Students'}
+        />
+
+
       </div>
     );
   }

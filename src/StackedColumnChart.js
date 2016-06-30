@@ -89,9 +89,46 @@ class StackedColumnChart extends React.Component {
         .attr('height', 0)
         .attr('fill', d => {return color(d.name)});
 
+    segs.on('mouseover', function() {
+      segs.attr('opacity', 0.5);
+      d3.select(this).attr('opacity', 1.0);
+    });
+
+    segs.on('mouseout', function() {
+      segs.attr('opacity', 1.0);
+    });
+
     segs.transition().delay(function(d, i) {return i * 330}).duration(330)
             .attr('y', d => {return yScale(d.y1)})
             .attr('height', d => {return yScale(d.y0) - yScale(d.y1)});
+
+    const legend = g.selectAll('.legend').data(vars.yVal);
+
+    legend.enter().append('rect')
+          .attr('transform', function(d, i) {return 'translate(0, ' + (i * 25) + ')'})
+          .attr('x', innerW + 25)
+          .attr('width', 20)
+          .attr('height', 20)
+          .attr('class', 'legend')
+          .attr('opacity', 0);
+
+    legend.attr('fill', d => {console.log(d); return color(d)});
+
+    legend.transition().delay(function(d, i) {return i * 330}).duration(330).attr('opacity', 1);
+
+    const words = g.selectAll('.legend-text').data(xValues);
+
+    words.enter().append('text')
+          .attr('transform', function(d, i) {return 'translate(0, ' + (i * 25) + ')'})
+          .attr('x', innerW + 50)
+          .attr('y', 9)
+          .attr('dy', '.35em')
+          .style('text-anchor', 'start')
+          .text(d => {return d})
+          .attr('class', 'legend-text')
+          .attr('opacity', 0);
+
+    words.transition().delay(function(d, i) {return i * 330}).duration(330).duration(1000).attr('opacity', 1);
   }
 
   //update chart
