@@ -80,7 +80,7 @@ class BarChart extends React.Component {
 
 
     /*----------set axes --------------*/
-    const xAxis = this.getXAxis(xScale);
+    const xAxis = this.getXAxis(xScale).innerTickSize(-innerH);
     gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
                        .transition()
                        .duration(1000)
@@ -187,7 +187,7 @@ class BarChart extends React.Component {
     })]);
     //
     //update axes
-    const xAxis = this.getXAxis(xScale);
+    const xAxis = this.getXAxis(xScale).innerTickSize(-innerH);
     gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
                        .transition()
                        .duration(1000)

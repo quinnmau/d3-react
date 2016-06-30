@@ -61,7 +61,7 @@ class App extends React.Component {
                      height={500}
                      xVal={'name'}
                      yVal={this.state.yVal}
-                     title={'Frequency of Students'}
+                     title={'This is a title'}
         />
 
         <button onClick={() => {
@@ -91,7 +91,7 @@ class App extends React.Component {
                      height={500}
                      xVal={'name'}
                      yVal={this.state.yVal}
-                     title={'Frequency of Students'}
+                     title={'This is a title'}
         />
 
         <StackedColumnChart data={this.state.data}
@@ -99,7 +99,7 @@ class App extends React.Component {
                             height={500}
                             xVal={'name'}
                             yVal={this.state.stackVal}
-                            title={'Frequency of Students'}
+                            title={'This is a title'}
         />
 
 

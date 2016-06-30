@@ -22,3 +22,11 @@ svg {
   font-size: 26px;
   fill: #3a4f5a;
 }
+
+div {
+  display: inline-block;
+}
+
+#data {
+  width: 500px;
+}

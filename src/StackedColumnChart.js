@@ -55,7 +55,7 @@ class StackedColumnChart extends React.Component {
     vars.data.forEach(d => {
       var y0 = 0;
       d.segments = vars.yVal.map(type => {return {name: type, y0: y0, y1: y0 += +d[type]};});
-      d.segments.forEach(d => {d.y0 /= y0; d.y1 /= y0;});
+      d.segments.forEach(d => {console.log(d); d.y0 /= y0; d.y1 /= y0;});
     });
 
     //y scale
@@ -67,7 +67,7 @@ class StackedColumnChart extends React.Component {
     gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
             .transition().duration(1000).call(xAxis);
 
-    const yAxis = d3.svg.axis().scale(yScale).orient('left').tickFormat(d3.format('.0%'));
+    const yAxis = d3.svg.axis().scale(yScale).orient('left').tickFormat(d3.format('.0%')).innerTickSize(-innerW);
 
     gEnter.select('.y').transition().duration(1000).call(yAxis);
     /*---------------make stacks----------------------------*/
@@ -112,11 +112,11 @@ class StackedColumnChart extends React.Component {
           .attr('class', 'legend')
           .attr('opacity', 0);
 
-    legend.attr('fill', d => {console.log(d); return color(d)});
+    legend.attr('fill', d => {return color(d)});
 
     legend.transition().delay(function(d, i) {return i * 330}).duration(330).attr('opacity', 1);
 
-    const words = g.selectAll('.legend-text').data(xValues);
+    const words = g.selectAll('.legend-text').data(vars.yVal);
 
     words.enter().append('text')
           .attr('transform', function(d, i) {return 'translate(0, ' + (i * 25) + ')'})
