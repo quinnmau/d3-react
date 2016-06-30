@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ColumnChart from './ColumnChart';
 import BarChart from './BarChart';
+import StackedColumnChart from './StackedColumnChart';
 
 const data2 = [
   {
@@ -49,7 +50,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {data: data2,
-    yVal: ['freq']};
+    yVal: ['freq'], stackVal: ['freq', 'freq2', 'freq3']};
   }
 
   render() {
@@ -69,6 +70,14 @@ class App extends React.Component {
                      xVal={'name'}
                      yVal={this.state.yVal}
                      title={'Frequency of Students'}
+        />
+
+        <StackedColumnChart data={this.state.data}
+                            width={500}
+                            height={500}
+                            xVal={'name'}
+                            yVal={this.state.stackVal}
+                            title={'Frequency of Students'}
         />
 
         <button onClick={() => {
