@@ -46,16 +46,14 @@ class StackedColumnChart extends React.Component {
     gEnter.append('text').attr('class', 'title').attr('transform', 'translate(0, -25)').text(vars.title);
 
     /*---------------set scales and format data---------------------------*/
-    console.log(vars.data);
     //x scale
     const xValues = vars.data.map(d => {return d[vars.xVal]});
     const xScale = this.getXScale(innerW).domain(xValues);
-
     //format data
     vars.data.forEach(d => {
-      var y0 = 0;
+      let y0 = 0;
       d.segments = vars.yVal.map(type => {return {name: type, y0: y0, y1: y0 += +d[type]};});
-      d.segments.forEach(d => {console.log(d); d.y0 /= y0; d.y1 /= y0;});
+      d.segments.forEach(d => {d.y0 /= y0; d.y1 /= y0;});
     });
 
     //y scale

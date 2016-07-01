@@ -219,6 +219,15 @@ class BarChart extends React.Component {
      bars.enter().append('rect')
          .attr('width', 0);
 
+     bars.on('mouseover', function() {
+       bars.attr('opacity', 0.5);
+       d3.select(this).attr('opacity', 1.0);
+     });
+
+     bars.on('mouseout', function() {
+       bars.attr('opacity', 1.0);
+     });
+
      bars.attr('fill', d => {return color(d.name)});
 
      bars.transition().duration(1000)

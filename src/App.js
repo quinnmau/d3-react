@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ColumnChart from './ColumnChart';
 import BarChart from './BarChart';
 import StackedColumnChart from './StackedColumnChart';
+import StackedBarChart from './StackedBarChart';
 
 const data2 = [
   {
@@ -56,45 +57,17 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <ColumnChart data={this.state.data}
-                     width={500}
-                     height={500}
-                     xVal={'name'}
-                     yVal={this.state.yVal}
-                     title={'This is a title'}
-        />
 
-        <button onClick={() => {
-          this.setState(
-            {data: data2,
-             yVal: ['freq']
-            }
-          );
-        }}>click me</button>
-        <button onClick={() => {
-          this.setState(
-            {data: data2,
-             yVal: ['freq', 'freq2']
-            }
-          );
-        }}>click me</button>
-        <button onClick={() => {
-          this.setState(
-            {data: data2,
-             yVal: ['freq', 'freq2', 'freq3']
-            }
-          );
-        }}>click me</button>
-
-        <BarChart data={this.state.data}
-                     width={500}
-                     height={500}
-                     xVal={'name'}
-                     yVal={this.state.yVal}
-                     title={'This is a title'}
-        />
 
         <StackedColumnChart data={this.state.data}
+                            width={500}
+                            height={500}
+                            xVal={'name'}
+                            yVal={this.state.stackVal}
+                            title={'This is a title'}
+        />
+
+        <StackedBarChart data={this.state.data}
                             width={500}
                             height={500}
                             xVal={'name'}
@@ -111,3 +84,41 @@ class App extends React.Component {
 
 
 ReactDOM.render(<App />, document.getElementById('app'));
+
+// <ColumnChart data={this.state.data}
+//              width={500}
+//              height={500}
+//              xVal={'name'}
+//              yVal={this.state.yVal}
+//              title={'This is a title'}
+// />
+//
+// <button onClick={() => {
+//   this.setState(
+//     {data: data2,
+//      yVal: ['freq']
+//     }
+//   );
+// }}>click me</button>
+// <button onClick={() => {
+//   this.setState(
+//     {data: data2,
+//      yVal: ['freq', 'freq2']
+//     }
+//   );
+// }}>click me</button>
+// <button onClick={() => {
+//   this.setState(
+//     {data: data2,
+//      yVal: ['freq', 'freq2', 'freq3']
+//     }
+//   );
+// }}>click me</button>
+//
+// <BarChart data={this.state.data}
+//              width={500}
+//              height={500}
+//              xVal={'name'}
+//              yVal={this.state.yVal}
+//              title={'This is a title'}
+// />
