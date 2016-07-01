@@ -60,14 +60,16 @@ class StackedColumnChart extends React.Component {
     const yScale = this.getYScale(innerH);
 
     /*---------------set axes-----------------------------*/
-    const xAxis = d3.svg.axis().scale(xScale).orient('bottom');
+    const xAxis = d3.svg.axis().scale(xScale).orient('bottom').outerTickSize(0);
 
     gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
             .transition().duration(1000).call(xAxis);
 
-    const yAxis = d3.svg.axis().scale(yScale).orient('left').tickFormat(d3.format('.0%')).innerTickSize(-innerW);
+    const yAxis = d3.svg.axis().scale(yScale).orient('left').tickFormat(d3.format('.0%')).innerTickSize(-innerW).outerTickSize(0);
 
     gEnter.select('.y').transition().duration(1000).call(yAxis);
+
+    gEnter.selectAll('line') .style("stroke-dasharray", ("1, 1"));
     /*---------------make stacks----------------------------*/
     //reselect data points container, gEnter
     const g = svg.select('.gEnter');

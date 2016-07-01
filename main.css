@@ -3,9 +3,17 @@ body {
   font-size: 14px;
 }
 
-.axis path, .axis line {
+.axis path {
+  fill: none;
+  /*stroke: #8eafbf;*/
+  stroke: 'white';
+  shape-rendering: crispEdges;
+}
+
+.axis line {
   fill: none;
   stroke: #8eafbf;
+  /*stroke: 'white';*/
   shape-rendering: crispEdges;
 }
 
@@ -14,9 +22,11 @@ body {
   stroke: none;
 }
 
-svg {
+
+
+/*svg {
   border: 1px solid black;
-}
+}*/
 
 .title {
   font-size: 26px;

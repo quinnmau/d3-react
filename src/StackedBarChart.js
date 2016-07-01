@@ -64,19 +64,27 @@ class StackedBarChart extends React.Component {
     const xAxis = d3.svg.axis()
                     .orient('bottom')
                     .scale(xScale)
-                    .tickFormat(d3.format('.0%'));
+                    .tickFormat(d3.format('.0%'))
+                    .innerTickSize(-innerH)
+                    .outerTickSize(0);
+
     gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
                     .transition()
                     .duration(1000)
                     .call(xAxis);
 
+    gEnter.selectAll('line') .style("stroke-dasharray", ("1, 1"));
+
     const yAxis = d3.svg.axis()
                     .orient('left')
-                    .scale(yScale);
+                    .scale(yScale)
+                    .outerTickSize(0);
     gEnter.select('.y')
                     .transition()
                     .duration(1000)
                     .call(yAxis);
+
+
 
     /*--------------------------actual data points--------------------------*/
     //reselect gEnter
