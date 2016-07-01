@@ -4,75 +4,64 @@ import ColumnChart from './ColumnChart';
 import BarChart from './BarChart';
 import StackedColumnChart from './StackedColumnChart';
 import StackedBarChart from './StackedBarChart';
+import LineChart from './LineChart';
+import ScatterPlot from './ScatterPlot';
 
-const data2 = [
-  {
-    id: 1,
-    name: 'steve',
-    freq: 24,
-    freq2: 15,
-    freq3: 36
-  },
-  {
-    id: 2,
-    name: 'earl',
-    freq: 22,
-    freq2: 26,
-    freq3: 27
-  },
-  {
-    id: 3,
-    name: 'jimi',
-    freq: 5,
-    freq2: 11,
-    freq3: 21
-  }
-];
+// const data = [
+//   {
+//     month: 'jan',
+//     usa: 2,
+//     china: 3,
+//     germany: 5
+//   },
+//   {
+//     month: 'feb',
+//     usa: 5,
+//     china: 1,
+//     germany: 6
+//   },
+//   {
+//     month: 'mar',
+//     usa: 9,
+//     china: 2,
+//     germany: 8
+//   }
+// ];
 
 const data = [
   {
-    id: 1,
-    name: 'steve',
-    freq: 31
+    name: 'usa',
+    x: 6,
+    y: 9
   },
   {
-    id: 2,
-    name: 'earl',
-    freq: 22
+    name: 'chn',
+    x: 15,
+    y: 4
   },
   {
-    id: 3,
-    name: 'jimi',
-    freq: 5
+    name: 'jpn',
+    x: 10,
+    y: 12
   }
 ];
 
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {data: data2,
-    yVal: ['freq'], stackVal: ['freq', 'freq2', 'freq3']};
+    this.state = {data: data};
   }
 
   render() {
     return (
       <div>
 
-
-        <StackedColumnChart data={this.state.data}
-                            width={500}
-                            height={500}
-                            xVal={'name'}
-                            yVal={this.state.stackVal}
-                            title={'This is a title'}
-        />
-
-        <StackedBarChart data={this.state.data}
-                            width={500}
-                            height={500}
-                            xVal={'name'}
-                            yVal={this.state.stackVal}
-                            title={'This is a title'}
+        <ScatterPlot data={this.state.data}
+                      width={500}
+                      height={500}
+                      xVal={'x'}
+                      yVal={'y'}
+                      title={'This is a title'}
         />
 
 
@@ -81,44 +70,12 @@ class App extends React.Component {
   }
 }
 
-
+// <LineChart data={this.state.data}
+//             width={500}
+//             height={500}
+//             yVal={['usa', 'chn', 'ger']}
+//             xVal={'month'}
+//             title={'This is a title'}
+// />
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
-// <ColumnChart data={this.state.data}
-//              width={500}
-//              height={500}
-//              xVal={'name'}
-//              yVal={this.state.yVal}
-//              title={'This is a title'}
-// />
-//
-// <button onClick={() => {
-//   this.setState(
-//     {data: data2,
-//      yVal: ['freq']
-//     }
-//   );
-// }}>click me</button>
-// <button onClick={() => {
-//   this.setState(
-//     {data: data2,
-//      yVal: ['freq', 'freq2']
-//     }
-//   );
-// }}>click me</button>
-// <button onClick={() => {
-//   this.setState(
-//     {data: data2,
-//      yVal: ['freq', 'freq2', 'freq3']
-//     }
-//   );
-// }}>click me</button>
-//
-// <BarChart data={this.state.data}
-//              width={500}
-//              height={500}
-//              xVal={'name'}
-//              yVal={this.state.yVal}
-//              title={'This is a title'}
-// />
