@@ -73,7 +73,23 @@ const create = (elem, props) => {
 
   const g = svg.select('.gEnter');
 
-  const paths = g.selectAll('.a-path').data(deps);
+  console.log(deps);
+
+  const groups = g.selectAll('.groups').data(deps);
+  groups.enter().append('g')
+          .attr('class', 'groups');
+
+  groups.on('mouseover', function() {
+    groups.style('opacity', 0.5);
+    const guy = d3.select(this);
+    // guy.style('opacity', 1.0);
+  });
+
+  groups.on('mouseout', function() {
+    groups.style('opacity', 1.0);
+  });
+
+  const paths = groups.selectAll('.a-path').data(deps);
 
   paths.enter().append('path')
         .attr('class', 'a-path')
@@ -90,7 +106,7 @@ const create = (elem, props) => {
   paths.transition().duration(1000)
         .attr('d', d => {return line(d.values)});
 
-  const circlesG = g.selectAll('.circle-g').data(deps);
+  const circlesG = groups.selectAll('.circle-g').data(deps);
 
   circlesG.enter().append('g')
           .attr('class', 'circle-g');
@@ -99,13 +115,40 @@ const create = (elem, props) => {
 
   circles.enter().append('circle')
           .attr('r', 4)
-          .attr('cx', d => {console.log(d); return xScale(d.x)})
+          .attr('cx', d => {return xScale(d.x)})
           .attr('cy', innerH)
           .attr('fill', 'white')
           .style('stroke', d => {return color(d.name)});
 
   circles.transition().duration(1000)
             .attr('cy', d => {return yScale(d.y)});
+
+  const legend = g.selectAll('.legend').data(props.yVal);
+
+  legend.enter().append('rect')
+        .attr('transform', function(d, i) {return 'translate(0, ' + (i * 25) + ')'})
+        .attr('x', innerW + 25)
+        .attr('width', 20)
+        .attr('height', 20)
+        .attr('class', 'legend')
+        .attr('fill', d => {return color(d)})
+        .attr('opacity', 0);
+
+  legend.transition().duration(1000).attr('opacity', 1);
+
+  const words = g.selectAll('.legend-text').data(props.yVal);
+
+  words.enter().append('text')
+        .attr('transform', function(d, i) {return 'translate(0, ' + (i * 25) + ')'})
+        .attr('x', innerW + 50)
+        .attr('y', 9)
+        .attr('dy', '.35em')
+        .style('text-anchor', 'start')
+        .text(d => {return d})
+        .attr('class', 'legend-text')
+        .attr('opacity', 0);
+
+  words.transition().duration(1000).attr('opacity', 1);
 
 
 }
