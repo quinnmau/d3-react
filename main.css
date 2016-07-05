@@ -33,10 +33,12 @@ body {
   fill: #3a4f5a;
 }
 
-div {
-  display: inline-block;
-}
-
 #data {
   width: 500px;
+}
+
+.a-path {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
 }

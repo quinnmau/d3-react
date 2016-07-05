@@ -50,9 +50,11 @@ const create = (elem, props) => {
           .attr('cx', d => {return xScale(d[props.xVal])})
           .attr('cy', innerH)
           .attr('r', 10)
+          .attr('opacity', 0)
           .attr('fill', '#2975E9');
 
   circles.transition().delay(300).duration(1000)
+          .attr('opacity', 1)
           .attr('cy', d => {return yScale(d[props.yVal])});
 }
 
