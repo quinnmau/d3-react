@@ -26,7 +26,7 @@ class App extends React.Component {
         <ColumnChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2']} title={'This is a title'} />
         <StackedBarChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2', 'freq3']} title={'This is a title'} />
         <BarChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1']} title={'This is a title'} />
-        <LineChart data={this.state.l} width={1000} height={500} xVal={'date'} yVal={'val'} title={'This is a title'} />
+        <LineChart data={this.state.l} width={1000} height={500} xVal={'date'} yVal={['usa', 'chn']} title={'This is a title'} />
       </div>
     );
   }

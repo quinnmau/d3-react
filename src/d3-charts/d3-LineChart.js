@@ -4,6 +4,7 @@ const create = (elem, props) => {
   const margin = {left: 40, bottom: 40, right: 100, top: 75};
   const innerW = props.width - margin.left - margin.right;
   const innerH = props.height - margin.top - margin.bottom;
+  const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#ffcf3z']);
 
   //container
   const cont = d3.select(elem);
@@ -26,7 +27,7 @@ const create = (elem, props) => {
   //groups for axes and title
   gEnter.append('g').attr('class', 'x axis');
   gEnter.append('g').attr('class', 'y axis');
-  gEnter.append('text').attr('class', 'title');
+  gEnter.append('text').attr('class', 'title').attr('transform', 'translate(0, -40)').text(props.title);
 
   /*-------------------set scales---------------------------*/
   const xValues = props.data.map(d => {
@@ -34,14 +35,27 @@ const create = (elem, props) => {
   });
   const xScale = getXScale(innerW).domain(d3.extent(xValues, d => {return d}));
 
-  const yValues = props.data.map(d => {return d[props.yVal]});
+  const yValues = [];
+  props.data.forEach(d => {
+    for (let i in d) {
+      if (props.yVal.indexOf(i) !== -1) {
+        yValues.push(d[i]);
+      }
+    }
+  });
+
   const yScale = getYScale(innerH).domain(d3.extent(yValues, d => {return d}));
   /*-------------------set axes---------------------------*/
   const xAxis = d3.svg.axis().scale(xScale).orient('bottom');
   const yAxis = d3.svg.axis().scale(yScale).orient('left').innerTickSize(-innerW);
 
-  gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')').call(xAxis);
-  gEnter.select('.y').call(yAxis);
+  gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
+                      .transition().duration(1000)
+                      .call(xAxis);
+
+  gEnter.select('.y').transition().duration(1000).call(yAxis);
+
+  gEnter.selectAll('line') .style("stroke-dasharray", ("1, 1"));
   /*-------------------plot data---------------------------*/
   const line = d3.svg.line()
                   // .interpolate('basis')
@@ -52,7 +66,7 @@ const create = (elem, props) => {
     return {
       name: name,
       values: props.data.map(a => {
-        return {x: d3.time.format('%Y-%m-%d').parse(a[props.xVal]), y: +a[name]};
+        return {x: d3.time.format('%Y-%m-%d').parse(a[props.xVal]), y: +a[name], name: name};
       })
     };
   });
@@ -63,6 +77,17 @@ const create = (elem, props) => {
 
   paths.enter().append('path')
         .attr('class', 'a-path')
+        .attr('d', d => {
+          let arr = [];
+          for (let i = 0; i < d.values.length; i++) {
+            let obj = {x: d.values[i].x, y: d3.min(yValues)};
+            arr.push(obj);
+          }
+          return line(arr);
+        })
+        .style('stroke', d => {return color(d.name)});
+
+  paths.transition().duration(1000)
         .attr('d', d => {return line(d.values)});
 
   const circlesG = g.selectAll('.circle-g').data(deps);
@@ -74,8 +99,13 @@ const create = (elem, props) => {
 
   circles.enter().append('circle')
           .attr('r', 4)
-          .attr('cx', d => {return xScale(d.x)})
-          .attr('cy', d => {return yScale(d.y)});
+          .attr('cx', d => {console.log(d); return xScale(d.x)})
+          .attr('cy', innerH)
+          .attr('fill', 'white')
+          .style('stroke', d => {return color(d.name)});
+
+  circles.transition().duration(1000)
+            .attr('cy', d => {return yScale(d.y)});
 
 
 }
