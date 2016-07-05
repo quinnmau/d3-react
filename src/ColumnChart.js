@@ -90,6 +90,8 @@ class ColumnChart extends React.Component {
               .duration(1000)
               .call(yAxis);
 
+    gEnter.selectAll('line') .style("stroke-dasharray", ("1, 1"));
+
     const g = svg.select('.gEnter');
 
     const groups = g.selectAll('.groups').data(data);
