@@ -33,5 +33,20 @@
 
 .a-path {
   fill: none;
-  stroke-width: 1.5px;
+  stroke-width: 2px;
 }
+
+.connectors {
+  stroke-width: 2px;
+}
+
+ .micro-card {
+   overflow: hidden;
+   display: inline-block;
+   text-align: center;
+ }
+
+ .stat {
+   color: #2975e9;
+   font-size: 5em;
+ }

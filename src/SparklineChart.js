@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { create, update } from 'd3-SparklineChart';
+import { create} from './d3-charts/d3-SparklineChart';
 
 class SparklineChart extends React.Component {
   render() {
     return (
-      <div className="vis">
+      <div className="card-block">
 
       </div>
     )
@@ -17,7 +17,7 @@ class SparklineChart extends React.Component {
   }
 
   componentDidUpdate() {
-
+    // update();
   }
 
   componentWillUnmount() {

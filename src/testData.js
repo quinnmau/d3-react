@@ -45,21 +45,21 @@ const line = () => {
   return [
     {
       date: '2016-03-01',
-      usa: 7,
-      chn: 4,
-      ger: 9
+      usa: 7
+      // chn: 4,
+      // ger: 9
     },
     {
-      date: '2016-03-15',
-      usa: 5,
-      chn: 11,
-      ger: 8
+      date: '2016-04-15',
+      usa: 3
+      // chn: 11,
+      // ger: 8
     },
     {
-      date: '2016-03-31',
-      usa: 10,
-      chn: 9,
-      ger: 7
+      date: '2016-05-31',
+      usa: 10
+      // chn: 9,
+      // ger: 7
     }
   ];
 }
