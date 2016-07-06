@@ -1,6 +1,6 @@
-body {
-  font-family: sans-serif;
-  font-size: 14px;
+.vis {
+  display: inline-block;
+  margin: 20px auto;
 }
 
 .axis path {
@@ -22,12 +22,6 @@ body {
   stroke: none;
 }
 
-
-
-/*svg {
-  border: 1px solid black;
-}*/
-
 .title {
   font-size: 26px;
   fill: #3a4f5a;
@@ -39,5 +33,5 @@ body {
 
 .a-path {
   fill: none;
-  stroke-width: 2px;
+  stroke-width: 1.5px;
 }

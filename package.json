@@ -17,6 +17,7 @@
     "webpack-dev-server": "^1.14.*"
   },
   "dependencies": {
+    "apollo-ui": "^1.0.0-beta.3",
     "react": "^15.0.0",
     "react-dom": "15.0.0"
   }

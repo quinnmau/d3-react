@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 class ColumnChart extends React.Component {
   render() {
     return (
-      <div class="vis">
+      <div className="vis">
 
       </div>
     );
@@ -54,7 +54,7 @@ class ColumnChart extends React.Component {
 
     //title
     gEnter.append('text').attr('class', 'title').text(this.props.title)
-                  .attr('transform', 'translate(0, -30)');
+                  .attr('transform', 'translate(0, -25)');
 
     //group scale
     /* format x values to start with capitals */

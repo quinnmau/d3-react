@@ -46,7 +46,7 @@ const create = (elem, props) => {
 
   const yScale = getYScale(innerH).domain(d3.extent(yValues, d => {return d}));
   /*-------------------set axes---------------------------*/
-  const xAxis = d3.svg.axis().scale(xScale).orient('bottom');
+  const xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(props.ticks);
   const yAxis = d3.svg.axis().scale(yScale).orient('left').innerTickSize(-innerW);
 
   gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
@@ -75,21 +75,7 @@ const create = (elem, props) => {
 
   console.log(deps);
 
-  const groups = g.selectAll('.groups').data(deps);
-  groups.enter().append('g')
-          .attr('class', 'groups');
-
-  groups.on('mouseover', function() {
-    groups.style('opacity', 0.5);
-    const guy = d3.select(this);
-    // guy.style('opacity', 1.0);
-  });
-
-  groups.on('mouseout', function() {
-    groups.style('opacity', 1.0);
-  });
-
-  const paths = groups.selectAll('.a-path').data(deps);
+  const paths = g.selectAll('.a-path').data(deps);
 
   paths.enter().append('path')
         .attr('class', 'a-path')
@@ -106,7 +92,7 @@ const create = (elem, props) => {
   paths.transition().duration(1000)
         .attr('d', d => {return line(d.values)});
 
-  const circlesG = groups.selectAll('.circle-g').data(deps);
+  const circlesG = g.selectAll('.circle-g').data(deps);
 
   circlesG.enter().append('g')
           .attr('class', 'circle-g');

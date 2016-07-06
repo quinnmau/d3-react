@@ -5,7 +5,7 @@ import { create, update } from './d3-charts/d3-ScatterPlot';
 class ScatterPlot extends React.Component {
   render() {
     return (
-      <div>
+      <div className="vis">
 
       </div>
     );

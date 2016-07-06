@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 class BarChart extends React.Component {
   render() {
     return (
-      <div class="vis">
+      <div className="vis">
 
       </div>
     )
@@ -91,7 +91,7 @@ class BarChart extends React.Component {
                        .duration(1000)
                        .call(yAxis);
 
-   gEnter.selectAll('line') .style("stroke-dasharray", ("1, 1")); 
+   gEnter.selectAll('line') .style("stroke-dasharray", ("1, 1"));
 
     //reselect gEnter
     const g = svg.select('.gEnter');

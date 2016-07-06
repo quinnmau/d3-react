@@ -46,17 +46,20 @@ const line = () => {
     {
       date: '2016-03-01',
       usa: 7,
-      chn: 4
+      chn: 4,
+      ger: 9
     },
     {
       date: '2016-03-15',
       usa: 5,
-      chn: 11
+      chn: 11,
+      ger: 8
     },
     {
       date: '2016-03-31',
       usa: 10,
-      chn: 9
+      chn: 9,
+      ger: 7
     }
   ];
 }
