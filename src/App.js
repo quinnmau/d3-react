@@ -10,6 +10,7 @@ import { scatter, column, line } from './testData';
 import Random from './Random';
 import Card from './cards/Card';
 import SparklineChart from './SparklineChart';
+import Card2 from './cards/Card2';
 
 const scatterData = scatter();
 const columnData = column();
@@ -25,7 +26,7 @@ class App extends React.Component {
     return (
       <div>
         <Card name={'Growth'} des={'value in percent'} number={'19.1%'} data={this.state.l}/>
-
+        <Card2 name={'Distribution'} des={'value in units'} number={'709'} data={this.state.c} />
       </div>
     );
   }

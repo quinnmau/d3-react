@@ -5,7 +5,7 @@ import { create } from './d3-charts/d3-SparkcolumnChart';
 class SparkcolumnChart extends React.Component {
   render() {
     return (
-      <div>
+      <div className="card-block">
 
       </div>
     )
@@ -13,8 +13,10 @@ class SparkcolumnChart extends React.Component {
 
   componentDidMount() {
     const el = ReactDOM.findDOMNode(this);
-    create(el, props);
+    create(el, this.props);
   }
 
 
 }
+
+export default SparkcolumnChart;

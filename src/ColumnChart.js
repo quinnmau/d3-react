@@ -114,7 +114,7 @@ class ColumnChart extends React.Component {
 
     bars.transition().duration(1000)
         .attr('y', d => {return yScale(d.value)})
-        .attr('height', d => {return (innerH - yScale(d.value))})
+        .attr('height', d => {return (innerH - yScale(d.value))});
 
     bars.on('mouseover', function() {
       bars.attr('opacity', 0.5);
