@@ -18,6 +18,17 @@ const scatter = () => {
   ];
 }
 
+const bullet = () => {
+  return [
+    {
+      id: 'USA',
+      target: 15,
+      actual: 12,
+      range: 20
+    }
+  ];
+}
+
 const column = () => {
   return [
     {
@@ -64,4 +75,4 @@ const line = () => {
   ];
 }
 
-export { scatter, column, line };
+export { scatter, column, line, bullet };
