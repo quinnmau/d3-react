@@ -40,7 +40,9 @@ const create = (elem, props) => {
   const xScale = d3.scale.linear().range([0, innerW]).domain([0, d3.max(xValues)]);
 
   const xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(2);
-  gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')').call(xAxis);
+  gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
+                      .transition().duration(1000)
+                      .call(xAxis);
 
   // const yAxis = d3.svg.axis().scale(yScale).orient('left').ticks(2);
   // gEnter.select('.y').call(yAxis);
@@ -53,10 +55,13 @@ const create = (elem, props) => {
               .attr('class', 'second-bar')
               .attr('x', 0)
               .attr('y', d => {return yScale(d[props.yVal])})
-              .attr('width', d => {return xScale(d[props.range])})
+              .attr('width', 0)
               .attr('height', yScale.rangeBand())
               .attr('fill', '#2975E9')
               .attr('opacity', 0.25);
+
+  secondaryBars.transition().duration(1000)
+                .attr('width', d => {return xScale(d[props.range])});
 
   const actualBars = g.selectAll('.actual-bar').data(props.data);
 
@@ -64,19 +69,26 @@ const create = (elem, props) => {
               .attr('class', 'actual-bar')
               .attr('x', 0)
               .attr('y', d => {return yScale(d[props.yVal]) + yScale.rangeBand() * 0.25})
-              .attr('width', d => {return xScale(d[props.actual])})
+              .attr('width', 0)
               .attr('height', yScale.rangeBand() * 0.5)
               .attr('fill', '#2975E9');
+
+  actualBars.transition().duration(1000)
+              .attr('width', d => {return xScale(d[props.actual])});
 
   const targetBar = g.selectAll('.target-bar').data(props.data);
 
   targetBar.enter().append('rect')
             .attr('class', 'targer-bar')
             .attr('y', d => {return yScale(d[props.yVal]) + yScale.rangeBand() * (1 / 6) * .5})
-            .attr('x', d => {return xScale(d[props.target])})
+            .attr('x', 0)
             .attr('height', yScale.rangeBand() * (5 / 6))
-            .attr('width', yScale.rangeBand() * (1 / 3) * 0.5)
+            .attr('width', 0)
             .attr('fill', '#2975E9');
+
+  targetBar.transition().duration(1000)
+              .attr('x', d => {return xScale(d[props.target])})
+              .attr('width', yScale.rangeBand() * (1 / 3) * 0.5);
 
 }
 
