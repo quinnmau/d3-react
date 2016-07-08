@@ -22,9 +22,9 @@ const bullet = () => {
   return [
     {
       id: 'USA',
-      target: 15,
-      actual: 12,
-      range: 20
+      target: 16,
+      actual: 17,
+      range: 13
     }
   ];
 }
