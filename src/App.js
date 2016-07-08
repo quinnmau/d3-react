@@ -28,9 +28,9 @@ class App extends React.Component {
     return (
       <div>
         <BulletChart data={this.state.b}
-                     width={200}
-                     height={500}
-                     xVal={'id'}
+                     width={500}
+                     height={200}
+                     yVal={'id'}
                      target={'target'}
                      actual={'actual'}
                      range={'range'} />

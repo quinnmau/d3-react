@@ -30,35 +30,31 @@ const create = (elem, props) => {
 
   console.log(props.data);
 
-  const xValues = props.data.map(d => {return d[props.xVal]});
-  const xScale = d3.scale.ordinal().rangeRoundBands([0, innerW], 0.2).domain(xValues);
+  const yValues = props.data.map(d => {return d[props.yVal]});
+  const yScale = d3.scale.ordinal().rangeRoundBands([innerH, 0], 0.2).domain(yValues);
 
+  const xValues = [];
+  xValues.push(d3.max(props.data, d => {return d[props.target]}));
+  xValues.push(d3.max(props.data, d => {return d[props.range]}));
+  xValues.push(d3.max(props.data, d => {return d[props.actual]}));
+  const xScale = d3.scale.linear().range([0, innerW]).domain([0, d3.max(xValues)]);
 
-  const yScale = d3.scale.linear().range([innerH, 0]).domain([0, 25]);
+  const xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(2);
+  gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')').call(xAxis);
 
-  // const xAxis = d3.svg.axis().scale(xScale).orient('bottom');
-  // gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')').call(xAxis);
-
-  const yAxis = d3.svg.axis().scale(yScale).orient('left').ticks(2);
-  gEnter.select('.y').call(yAxis);
+  // const yAxis = d3.svg.axis().scale(yScale).orient('left').ticks(2);
+  // gEnter.select('.y').call(yAxis);
 
   const g = svg.select('.gEnter');
-
-  // const groups = g.selectAll('.groupss').data(props.data);
-  // console.log(groups);
-  //
-  // groups.enter().append('g')
-  //       .attr('class', 'groupss')
-  //       .attr('transform', d => {return 'translate(' + xScale(d[props.xVal]) + ', 0)'});
 
   const secondaryBars = g.selectAll('.second-bar').data(props.data);
 
   secondaryBars.enter().append('rect')
               .attr('class', 'second-bar')
-              .attr('x', d => {return xScale(d[props.xVal])})
-              .attr('y', d => {console.log(d); return yScale(d[props.range])})
-              .attr('width', xScale.rangeBand())
-              .attr('height', d => {return (innerH - yScale(d[props.range]))})
+              .attr('x', 0)
+              .attr('y', d => {return yScale(d[props.yVal])})
+              .attr('width', d => {return xScale(d[props.range])})
+              .attr('height', yScale.rangeBand())
               .attr('fill', '#2975E9')
               .attr('opacity', 0.25);
 
@@ -66,20 +62,20 @@ const create = (elem, props) => {
 
   actualBars.enter().append('rect')
               .attr('class', 'actual-bar')
-              .attr('x', d => {return xScale(d[props.xVal]) + xScale.rangeBand() * .25})
-              .attr('y', d => {return yScale(d[props.actual])})
-              .attr('width', xScale.rangeBand() * 0.5)
-              .attr('height', d => {return innerH - yScale(d[props.actual])})
+              .attr('x', 0)
+              .attr('y', d => {return yScale(d[props.yVal]) + yScale.rangeBand() * 0.25})
+              .attr('width', d => {return xScale(d[props.actual])})
+              .attr('height', yScale.rangeBand() * 0.5)
               .attr('fill', '#2975E9');
 
   const targetBar = g.selectAll('.target-bar').data(props.data);
 
   targetBar.enter().append('rect')
             .attr('class', 'targer-bar')
-            .attr('x', d => {return xScale(d[props.xVal]) + xScale.rangeBand() * (1 / 6) * .5})
-            .attr('y', d => {return yScale(d[props.target])})
-            .attr('width', xScale.rangeBand() * (5 / 6))
-            .attr('height', xScale.rangeBand() * (1 / 3) * 0.5)
+            .attr('y', d => {return yScale(d[props.yVal]) + yScale.rangeBand() * (1 / 6) * .5})
+            .attr('x', d => {return xScale(d[props.target])})
+            .attr('height', yScale.rangeBand() * (5 / 6))
+            .attr('width', yScale.rangeBand() * (1 / 3) * 0.5)
             .attr('fill', '#2975E9');
 
 }
