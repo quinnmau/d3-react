@@ -30,7 +30,10 @@ const create = (elem, props) => {
 
   const g = svg.select('.gEnter');
 
-  // g.append('text').attr('class', 'some-text').attr('text-anchor', 'middle');
+  g.append('text').attr('class', 'h1 hero-heading big-num').attr('text-anchor', 'middle');
+  g.append('text').attr('class', 'h3 small-num')
+                  .attr('text-anchor', 'middle')
+                  .attr('transform', 'translate(0, 30)');
 
   //format data
   let total = 0;
@@ -48,10 +51,10 @@ const create = (elem, props) => {
   //actual arcs
   arcs.append('path')
         .attr('d', arc)
-        .attr('fill', d => {console.log(d); return color(d.data[props.indy])});
+        .attr('fill', d => {return color(d.data[props.indy])});
 
   //Enlarge arc size on mouseover
-  arcs.on('mouseover', d => {
+  arcs.on('mouseover', function(d) {
     const cover = d3.svg.arc().innerRadius(radius)
                               .outerRadius(radius - 80);
 
@@ -59,7 +62,10 @@ const create = (elem, props) => {
                     .transition().duration(500)
                     .attr('d', cover);
 
-    // g.select('.some-text').text(d.data[props.indy]);
+    let format = d3.format('%');
+
+    g.select('.big-num').text(format(d.data[props.dep] / props.data.total));
+    g.select('.small-num').text(d.data[props.indy]);
   });
 
   //make size normal when mouse leaves arc
