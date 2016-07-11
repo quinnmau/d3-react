@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {create} from './d3-charts/d3-BulletChart';
+import { create } from '../d3-charts/d3-SparkcolumnChart';
 
-class BulletChart extends React.Component {
+class SparkcolumnChart extends React.Component {
   render() {
     return (
-      <div>
+      <div className="card-block">
 
       </div>
     )
@@ -15,6 +15,8 @@ class BulletChart extends React.Component {
     const el = ReactDOM.findDOMNode(this);
     create(el, this.props);
   }
+
+
 }
 
-export default BulletChart;
+export default SparkcolumnChart;

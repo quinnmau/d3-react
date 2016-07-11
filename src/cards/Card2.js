@@ -1,7 +1,7 @@
 import React from 'react';
 import NameDes from './NameDes';
 import BigStat from './BigStat';
-import SparkcolumnChart from '../SparkcolumnChart';
+import SparkcolumnChart from '../chart-components/SparkcolumnChart';
 
 const Card2 = (props) =>
   <div className="card micro-card">

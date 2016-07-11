@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { create, update } from './d3-charts/d3-ScatterPlot';
+import { create, update } from '../d3-charts/d3-LineChart';
 
-class ScatterPlot extends React.Component {
+class LineChart extends React.Component {
   render() {
     return (
       <div className="vis">
@@ -21,4 +21,4 @@ class ScatterPlot extends React.Component {
   }
 }
 
-export default ScatterPlot;
+export default LineChart;

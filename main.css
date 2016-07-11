@@ -5,8 +5,8 @@
 
 .axis path {
   fill: none;
-  stroke: #8eafbf;
-  /*stroke: 'white';*/
+  /*stroke: #8eafbf;*/
+  stroke: 'white';
   shape-rendering: crispEdges;
 }
 
@@ -50,3 +50,7 @@
    color: #2975e9;
    font-size: 5em;
  }
+/*
+ .some-text {
+   font-size: 52px;;
+ }*/

@@ -1,39 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ColumnChart from './ColumnChart';
-import BarChart from './BarChart';
-import StackedColumnChart from './StackedColumnChart';
-import StackedBarChart from './StackedBarChart';
-import LineChart from './LineChart';
-import ScatterPlot from './ScatterPlot';
-import { scatter, column, line, bullet } from './testData';
-import Random from './Random';
+import ColumnChart from './chart-components/ColumnChart';
+import BarChart from './chart-components/BarChart';
+import StackedColumnChart from './chart-components/StackedColumnChart';
+import StackedBarChart from './chart-components/StackedBarChart';
+import LineChart from './chart-components/LineChart';
+import ScatterPlot from './chart-components/ScatterPlot';
+import { scatter, column, line, bullet, nut } from './testData';
+import Random from './chart-components/Random';
 import Card from './cards/Card';
-import SparklineChart from './SparklineChart';
+import SparklineChart from './chart-components/SparklineChart';
 import Card2 from './cards/Card2';
-import BulletChart from './BulletChart';
+import BulletChart from './chart-components/BulletChart';
+import DonutChart from './chart-components/DonutChart';
 
 const scatterData = scatter();
 const columnData = column();
 const lineData = line();
 const bulletData = bullet();
+const nutData = nut();
 
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {s: scatterData, c: columnData, l: lineData, b: bulletData};
+    this.state = {s: scatterData, c: columnData, l: lineData, b: bulletData, n: nutData};
   }
 
   render() {
     return (
       <div>
-        <BulletChart data={this.state.b}
-                     width={500}
-                     height={200}
-                     yVal={'id'}
-                     target={'target'}
-                     actual={'actual'}
-                     range={'range'} />
+        <DonutChart data={this.state.n} indy={'name'} dep={'population'} width={500} height={500} title={'Sales'}/>
       </div>
     );
   }
@@ -47,5 +43,6 @@ class App extends React.Component {
 // <StackedBarChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2', 'freq3']} title={'This is a title'} />
 // <BarChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1']} title={'This is a title'} />
 // <LineChart data={this.state.l} width={500} height={500} xVal={'date'} yVal={['usa', 'chn', 'ger']} title={'This is a title'} ticks={5}/>
+// <BulletChart data={this.state.b} width={500} height={200} yVal={'id'} target={'target'} actual={'actual'} range={'range'} />
 
 ReactDOM.render(<App />, document.getElementById('app'));

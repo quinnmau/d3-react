@@ -1,7 +1,7 @@
 import React from 'react';
 import NameDes from './NameDes';
 import BigStat from './BigStat';
-import SparklineChart from '../SparklineChart';
+import SparklineChart from '../chart-components/SparklineChart';
 
 const Card = (props) =>
   <div className="card micro-card">

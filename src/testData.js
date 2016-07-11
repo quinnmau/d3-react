@@ -52,6 +52,23 @@ const column = () => {
   ];
 }
 
+const nut = () => {
+  return [
+    {
+      name: 'gomez',
+      population: 74
+    },
+    {
+      name: 'wong po',
+      population: 88
+    },
+    {
+      name: 'barret',
+      population: 34
+    }
+  ];
+}
+
 const line = () => {
   return [
     {
@@ -75,4 +92,4 @@ const line = () => {
   ];
 }
 
-export { scatter, column, line, bullet };
+export { scatter, column, line, bullet, nut };

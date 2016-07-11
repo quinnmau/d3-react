@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { create } from './d3-charts/d3-SparkcolumnChart';
+import { create} from '../d3-charts/d3-SparklineChart';
 
-class SparkcolumnChart extends React.Component {
+class SparklineChart extends React.Component {
   render() {
     return (
       <div className="card-block">
@@ -16,7 +16,13 @@ class SparkcolumnChart extends React.Component {
     create(el, this.props);
   }
 
+  componentDidUpdate() {
+    // update();
+  }
 
+  componentWillUnmount() {
+
+  }
 }
 
-export default SparkcolumnChart;
+export default SparklineChart;
