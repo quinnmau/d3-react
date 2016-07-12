@@ -1,0 +1,16 @@
+.side-bar {
+  float: left;
+  height: 800px;
+  background-color: #32b5fc;
+  color: white;
+}
+
+.side-elem {
+  background-color: lightgray;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#app {
+  height: 800px;
+}

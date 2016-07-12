@@ -13,6 +13,8 @@ import SparklineChart from './chart-components/SparklineChart';
 import Card2 from './cards/Card2';
 import BulletChart from './chart-components/BulletChart';
 import DonutChart from './chart-components/DonutChart';
+import SideBar from './ui-components/SideBar';
+import Header from './ui-components/Header';
 
 const scatterData = scatter();
 const columnData = column();
@@ -29,12 +31,14 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <DonutChart data={this.state.n} indy={'name'} dep={'population'} width={500} height={500} title={'Sales'}/>
+        <SideBar />
+        <Header />
       </div>
     );
   }
 }
 
+// <DonutChart data={this.state.n} indy={'name'} dep={'population'} width={500} height={500} title={'Sales'}/>
 // <Card name={'Growth'} des={'value in percent'} number={'19.1%'} data={this.state.l}/>
 // <Card2 name={'Distribution'} des={'value in units'} number={'709'} data={this.state.c} />
 // <ScatterPlot data={this.state.s} width={500} height={500} xVal={'x'} yVal={'y'} title={'This is a title'} />
