@@ -3,10 +3,10 @@ const create = (elem, props) => {
   const margin = {left: 40, bottom: 40, right: 40, top: 40};
   const innerW = props.width - margin.left - margin.right;
   const innerH = props.height - margin.top - margin.bottom;
-  const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#ffcf3z']);
+  const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#2CC039']);
   const radius = Math.min(innerW, innerH) / 2;
-  const arc = d3.svg.arc().innerRadius(radius - 10)
-                          .outerRadius(radius - 70);
+  const arc = d3.svg.arc().innerRadius(radius - (Math.min(innerW, innerH) * 0.1))
+                          .outerRadius(radius - (Math.min(innerW, innerH) * 0.2));
 
   const donut = d3.layout.pie().sort(null).value(d => {return d[props.dep]});
 
@@ -30,10 +30,19 @@ const create = (elem, props) => {
 
   const g = svg.select('.gEnter');
 
-  g.append('text').attr('class', 'h1 hero-heading big-num').attr('text-anchor', 'middle');
-  g.append('text').attr('class', 'h3 small-num')
-                  .attr('text-anchor', 'middle')
-                  .attr('transform', 'translate(0, 30)');
+  const textGroup = g.append('g');
+
+  textGroup.attr('text-anchor', 'middle')
+            .attr('alignment-baseline', 'central')
+            .style('overflow', 'hidden');
+
+  textGroup.append('text').attr('class', 'h1 hero-heading big-num')
+                  .attr('transform', 'translate(0, 10)')
+                  .style('font-size', innerW * 0.2);
+
+  textGroup.append('text').attr('class', 'h3 small-num')
+                          .attr('transform', 'translate(0, 40)')
+                          .style('font-size', innerW * 0.055);
 
   //format data
   let total = 0;
@@ -55,8 +64,8 @@ const create = (elem, props) => {
 
   //Enlarge arc size on mouseover
   arcs.on('mouseover', function(d) {
-    const cover = d3.svg.arc().innerRadius(radius)
-                              .outerRadius(radius - 80);
+    const cover = d3.svg.arc().innerRadius(radius - (Math.min(innerW, innerH) * 0.075))
+                            .outerRadius(radius - (Math.min(innerW, innerH) * 0.225));
 
     const curr = d3.select(this).select('path')
                     .transition().duration(500)
@@ -70,12 +79,15 @@ const create = (elem, props) => {
 
   //make size normal when mouse leaves arc
   arcs.on('mouseout', function() {
-    const cover = d3.svg.arc().innerRadius(radius - 10)
-                              .outerRadius(radius - 70);
+    const cover = d3.svg.arc().innerRadius(radius - (Math.min(innerW, innerH) * 0.1))
+                            .outerRadius(radius - (Math.min(innerW, innerH) * 0.2));
 
     const curr = d3.select(this).select('path')
                     .transition().duration(500)
                     .attr('d', cover);
+
+    // g.select('.big-num').text('');
+    // g.select('.small-num').text('');
   });
 
 }
