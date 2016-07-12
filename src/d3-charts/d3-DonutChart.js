@@ -37,12 +37,12 @@ const create = (elem, props) => {
             .style('overflow', 'hidden');
 
   textGroup.append('text').attr('class', 'h1 hero-heading big-num')
-                  .attr('transform', 'translate(0, 10)')
+                  .attr('dy', '.15em')
                   .style('font-size', innerW * 0.2);
 
   textGroup.append('text').attr('class', 'h3 small-num')
-                          .attr('transform', 'translate(0, 40)')
-                          .style('font-size', innerW * 0.055);
+                          .attr('dy', '2em')
+                          .style('font-size', innerW * 0.0575);
 
   //format data
   let total = 0;
@@ -86,8 +86,8 @@ const create = (elem, props) => {
                     .transition().duration(500)
                     .attr('d', cover);
 
-    // g.select('.big-num').text('');
-    // g.select('.small-num').text('');
+    g.select('.big-num').text('');
+    g.select('.small-num').text('');
   });
 
 }

@@ -56,19 +56,15 @@ const nut = () => {
   return [
     {
       name: 'gomez',
-      population: 25
+      population: 74
     },
     {
       name: 'wong po',
-      population: 25
+      population: 88
     },
     {
       name: 'barret',
-      population: 25
-    },
-    {
-      name: 'brian',
-      population: 25
+      population: 34
     }
   ];
 }
