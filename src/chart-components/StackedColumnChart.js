@@ -26,14 +26,16 @@ class StackedColumnChart extends React.Component {
 
     //group that holds all data points and axes and legend
     const gEnter = svg.enter().append('svg')
-                        .attr('width', vars.width)
-                        .attr('height', vars.height)
+                        // .attr('width', vars.width)
+                        // .attr('height', vars.height)
+                        .attr('viewBox', '0 0 ' + vars.width + ' ' + vars.height)
+                        .attr("preserveAspectRatio", "xMinYMin meet")
                         .append('g');
 
     //position gEnter
     gEnter.attr('class', 'gEnter')
-          .attr('width', innerW)
-          .attr('height', innerH)
+          // .attr('width', innerW)
+          // .attr('height', innerH)
           .attr('transform', 'translate(' + vars.margin.left + ', ' + vars.margin.top + ')');
 
     //group for x axis

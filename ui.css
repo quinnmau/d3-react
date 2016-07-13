@@ -14,3 +14,7 @@
 #app {
   height: 800px;
 }
+
+.contact-pane {
+  border: 1px solid black;
+}

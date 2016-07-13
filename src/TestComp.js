@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {create} from '../d3-charts/d3-DonutChart';
+import {create} from './d3-test';
 
-class DonutChart extends React.Component {
+class TestComp extends React.Component {
   render() {
     return (
-      <div className="vis">
+      <div className="container">
 
       </div>
     )
@@ -15,7 +15,6 @@ class DonutChart extends React.Component {
     const el = ReactDOM.findDOMNode(this);
     create(el, this.props);
   }
-
 }
 
-export default DonutChart;
+export default TestComp;
