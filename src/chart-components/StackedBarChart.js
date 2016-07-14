@@ -25,8 +25,10 @@ class StackedBarChart extends React.Component {
 
     //main group to hold actual data points
     const gEnter = svg.enter().append('svg')
-                    .attr('width', vars.width)
-                    .attr('height', vars.height)
+                    // .attr('width', vars.width)
+                    // .attr('height', vars.height)
+                    .attr('viewBox', '0 0 ' + vars.width + ' ' + vars.height)
+                    .attr("preserveAspectRatio", "xMinYMin meet")
                     .append('g');
 
     //positioning and size

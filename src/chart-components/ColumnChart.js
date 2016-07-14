@@ -35,8 +35,10 @@ class ColumnChart extends React.Component {
 
     //group for data and axes
     const gEnter = svg.enter().append('svg')
-                      .attr('width', width)
-                      .attr('height', height)
+                      // .attr('width', width)
+                      // .attr('height', height)
+                      .attr('viewBox', '0 0 ' + width + ' ' + height)
+                      .attr("preserveAspectRatio", "xMinYMin meet")
                       .attr('class', 'canvas')
                       .append('g');
 

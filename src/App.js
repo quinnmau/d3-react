@@ -13,9 +13,6 @@ import SparklineChart from './chart-components/SparklineChart';
 import Card2 from './cards/Card2';
 import BulletChart from './chart-components/BulletChart';
 import DonutChart from './chart-components/DonutChart';
-import SideBar from './ui-components/SideBar';
-import Header from './ui-components/Header';
-import TestComp from './TestComp';
 
 const scatterData = scatter();
 const columnData = column();
@@ -33,22 +30,51 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="">
-        <StackedColumnChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2', 'freq3']} title={'This is a title'} />
+      <div>
+        <div className="billboard bg-light">
+          <h1>Data Visualization</h1>
+        </div>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-4">
+              <DonutChart data={this.state.n} indy={'name'} dep={'population'} width={250} height={250} title={'Sales'}/>
+            </div>
+            <div className="col-md-4">
+              <ScatterPlot data={this.state.s} width={500} height={500} xVal={'x'} yVal={'y'} title={'This is a title'} />
+            </div>
+            <div className="col-md-4">
+              <StackedColumnChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2', 'freq3']} title={'This is a title'} />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-4">
+              <ColumnChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2']} title={'This is a title'} />
+            </div>
+            <div className="col-md-4">
+              <StackedBarChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2', 'freq3']} title={'This is a title'} />
+            </div>
+            <div className="col-md-4">
+              <BarChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1']} title={'This is a title'} />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-4">
+              <LineChart data={this.state.l} width={500} height={500} xVal={'date'} yVal={['usa', 'chn', 'ger']} title={'This is a title'} ticks={5}/>
+            </div>
+            <div className="col-md-4">
+              <BulletChart data={this.state.b} width={500} height={200} yVal={'id'} target={'target'} actual={'actual'} range={'range'} />
+            </div>
+            <div className="col-md-4">
+              <Card name={'Growth'} des={'value in percent'} number={'19.1%'} data={this.state.l}/>
+              <Card2 name={'Distribution'} des={'value in units'} number={'709'} data={this.state.c} />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-// <DonutChart data={this.state.n} indy={'name'} dep={'population'} width={500} height={500} title={'Sales'}/>
-// <Card name={'Growth'} des={'value in percent'} number={'19.1%'} data={this.state.l}/>
-// <Card2 name={'Distribution'} des={'value in units'} number={'709'} data={this.state.c} />
-// <ScatterPlot data={this.state.s} width={500} height={500} xVal={'x'} yVal={'y'} title={'This is a title'} />
 
-// <ColumnChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2']} title={'This is a title'} />
-// <StackedBarChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2', 'freq3']} title={'This is a title'} />
-// <BarChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1']} title={'This is a title'} />
-// <LineChart data={this.state.l} width={500} height={500} xVal={'date'} yVal={['usa', 'chn', 'ger']} title={'This is a title'} ticks={5}/>
-// <BulletChart data={this.state.b} width={500} height={200} yVal={'id'} target={'target'} actual={'actual'} range={'range'} />
 
 ReactDOM.render(<App />, document.getElementById('app'));

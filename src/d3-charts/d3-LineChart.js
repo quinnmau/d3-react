@@ -14,8 +14,10 @@ const create = (elem, props) => {
 
   //area for data points
   const gEnter = svg.enter().append('svg')
-                    .attr('width', props.width)
-                    .attr('height', props.height)
+                    // .attr('width', props.width)
+                    // .attr('height', props.height)
+                    .attr('viewBox', '0 0 ' + props.width + ' ' + props.height)
+                    .attr("preserveAspectRatio", "xMinYMin meet")
                     .append('g');
 
   //position area for data points

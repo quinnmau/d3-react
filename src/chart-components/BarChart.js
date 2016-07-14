@@ -38,8 +38,10 @@ class BarChart extends React.Component {
 
     //main group to hold actual data points
     const gEnter = svg.enter().append('svg')
-                    .attr('width', globals.width)
-                    .attr('height', globals.height)
+                    // .attr('width', globals.width)
+                    // .attr('height', globals.height)
+                    .attr('viewBox', '0 0 ' + globals.width + ' ' + globals.height)
+                    .attr("preserveAspectRatio", "xMinYMin meet")
                     .append('g');
 
     //positioning and size

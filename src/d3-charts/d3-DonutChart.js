@@ -16,8 +16,10 @@ const create = (elem, props) => {
 
   //svg for the donut
   const gEnter = svg.enter().append('svg')
-                    .attr('width', props.width)
-                    .attr('height', props.height)
+                    // .attr('width', props.width)
+                    // .attr('height', props.height)
+                    .attr('viewBox', '0 0 ' + props.width + ' ' + props.height)
+                    .attr("preserveAspectRatio", "xMinYMin meet")
                     .append('g');
 
   //positioning
