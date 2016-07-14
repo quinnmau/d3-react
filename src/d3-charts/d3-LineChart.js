@@ -56,8 +56,6 @@ const create = (elem, props) => {
                       .call(xAxis);
 
   gEnter.select('.y').transition().duration(1000).call(yAxis);
-
-  gEnter.selectAll('line') .style("stroke-dasharray", ("1, 1"));
   /*-------------------plot data---------------------------*/
   const line = d3.svg.line()
                   // .interpolate('basis')

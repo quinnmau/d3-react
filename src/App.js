@@ -20,7 +20,6 @@ const lineData = line();
 const bulletData = bullet();
 const nutData = nut();
 
-
 class App extends React.Component {
   constructor() {
     super();
@@ -43,7 +42,7 @@ class App extends React.Component {
               <ScatterPlot data={this.state.s} width={500} height={500} xVal={'x'} yVal={'y'} title={'This is a title'} />
             </div>
             <div className="col-md-4">
-              <StackedColumnChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2', 'freq3']} title={'This is a title'} />
+              <StackedColumnChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2']} title={'This is a title'} />
             </div>
           </div>
           <div className="row">
@@ -51,15 +50,15 @@ class App extends React.Component {
               <ColumnChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2']} title={'This is a title'} />
             </div>
             <div className="col-md-4">
-              <StackedBarChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2', 'freq3']} title={'This is a title'} />
+              <StackedBarChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2']} title={'This is a title'} />
             </div>
             <div className="col-md-4">
-              <BarChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1']} title={'This is a title'} />
+              <BarChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={['freq1', 'freq2']} title={'This is a title'} />
             </div>
           </div>
           <div className="row">
             <div className="col-md-4">
-              <LineChart data={this.state.l} width={500} height={500} xVal={'date'} yVal={['usa', 'chn', 'ger']} title={'This is a title'} ticks={5}/>
+              <LineChart data={this.state.l} width={500} height={500} xVal={'date'} yVal={['usa']} title={'This is a title'} ticks={5}/>
             </div>
             <div className="col-md-4">
               <BulletChart data={this.state.b} width={500} height={200} yVal={'id'} target={'target'} actual={'actual'} range={'range'} />

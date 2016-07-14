@@ -49,11 +49,11 @@ const create = (elem, props) => {
   const xAxis = d3.svg.axis().scale(xScale).orient('bottom').tickValues(xScale.domain()).tickFormat(d3.time.format('%B'));
   const yAxis = d3.svg.axis().scale(yScale).orient('left').innerTickSize(-innerW).ticks(3);
 
-  gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
-                      .transition().duration(1000)
-                      .call(xAxis);
+  // gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
+  //                     .transition().duration(1000)
+  //                     .call(xAxis);
 
-  gEnter.select('.y').transition().duration(1000).call(yAxis);
+  // gEnter.select('.y').transition().duration(1000).call(yAxis);
 
   const line = d3.svg.line()
                   // .interpolate('basis')

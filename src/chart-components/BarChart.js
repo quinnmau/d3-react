@@ -26,7 +26,7 @@ class BarChart extends React.Component {
   componentDidMount() {
     //global variables
     const globals = this.globals();
-    const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#ffcf3z']);
+    // const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#ffcf3z']);
     const innerW = globals.width - globals.margin.left - globals.margin.right;
     const innerH = globals.height - globals.margin.top - globals.margin.bottom;
 
@@ -63,6 +63,12 @@ class BarChart extends React.Component {
     const yGroups = globals.data.map(d => {return d[globals.yVal]});
     const groupScale = this.getGroupScale(innerH).domain(yGroups);
 
+    const color = d3.scale.ordinal().range(['#297DFD', '#94BEFE']);
+    if (globals.xVal.length > 2) {
+      color.range(['#2975E9', '#F7922E', '#37DAD3', '#43B649']);
+      console.log(color.range());
+    }
+
     //within group scale
     const yValues = globals.xVal.map(d => {return d});
     const yScale = d3.scale.ordinal().rangeRoundBands([groupScale.rangeBand(), 0])
@@ -92,8 +98,6 @@ class BarChart extends React.Component {
     gEnter.select('.y').transition()
                        .duration(1000)
                        .call(yAxis);
-
-   gEnter.selectAll('line') .style("stroke-dasharray", ("1, 1"));
 
     //reselect gEnter
     const g = svg.select('.gEnter');

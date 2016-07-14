@@ -16,7 +16,7 @@ class StackedColumnChart extends React.Component {
     const vars = this.globals();
     const innerW = vars.width - vars.margin.left - vars.margin.right;
     const innerH = vars.height - vars.margin.top - vars.margin.bottom;
-    const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#ffcf3z']);
+    const color = d3.scale.ordinal().range(['#2975E9', '#F7922E', '#37DAD3', '#43B649']);
 
     //container to hold everything
     const cont = d3.select(ReactDOM.findDOMNode(this));
@@ -70,8 +70,6 @@ class StackedColumnChart extends React.Component {
     const yAxis = d3.svg.axis().scale(yScale).orient('left').tickFormat(d3.format('.0%')).innerTickSize(-innerW).outerTickSize(0);
 
     gEnter.select('.y').transition().duration(1000).call(yAxis);
-
-    gEnter.selectAll('line') .style("stroke-dasharray", ("1, 1"));
     /*---------------make stacks----------------------------*/
     //reselect data points container, gEnter
     const g = svg.select('.gEnter');

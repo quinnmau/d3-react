@@ -23,7 +23,7 @@ class ColumnChart extends React.Component {
       right: 100,
       top: 75
     };
-    const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#ffcf3z']);
+    // const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#ffcf3z']);
     const innerW = width - margin.left - margin.right;
     const innerH = height - margin.top - margin.bottom;
 
@@ -72,6 +72,12 @@ class ColumnChart extends React.Component {
       d.groupDetails = xValues.map(name => {return {name: name, value: +d[name]}});
     });
 
+    const color = d3.scale.ordinal().range(['#297DFD', '#94BEFE']);
+    if (this.props.yVal.length > 2) {
+      color.range(['#2975E9', '#F7922E', '#37DAD3', '#43B649']);
+      console.log(color.range());
+    }
+
     //y scale
     const yScale = d3.scale.linear()
                     .domain([0, d3.max(data, d => {return d3.max(d.groupDetails, d => {return d.value})})])
@@ -91,8 +97,6 @@ class ColumnChart extends React.Component {
               .transition()
               .duration(1000)
               .call(yAxis);
-
-    gEnter.selectAll('line') .style("stroke-dasharray", ("1, 1"));
 
     const g = svg.select('.gEnter');
 

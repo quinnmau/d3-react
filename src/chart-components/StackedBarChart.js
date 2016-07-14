@@ -75,8 +75,6 @@ class StackedBarChart extends React.Component {
                     .duration(1000)
                     .call(xAxis);
 
-    gEnter.selectAll('line') .style("stroke-dasharray", ("1, 1"));
-
     const yAxis = d3.svg.axis()
                     .orient('left')
                     .scale(yScale)
