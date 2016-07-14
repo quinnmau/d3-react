@@ -13,6 +13,7 @@ import SparklineChart from './chart-components/SparklineChart';
 import Card2 from './cards/Card2';
 import BulletChart from './chart-components/BulletChart';
 import DonutChart from './chart-components/DonutChart';
+import Legend from './chart-components/Legend';
 
 const scatterData = scatter();
 const columnData = column();
@@ -30,6 +31,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <Legend data={this.state.c} width={100} height={100} dep={'name'}/>
         <div className="billboard bg-light">
           <h1>Data Visualization</h1>
         </div>
@@ -65,7 +67,6 @@ class App extends React.Component {
             </div>
             <div className="col-md-4">
               <Card className="tile" name={'Growth'} des={'value in percent'} number={'19.1%'} data={this.state.l}/>
-
             </div>
           </div>
         </div>

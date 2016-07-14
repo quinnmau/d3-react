@@ -34,11 +34,11 @@
 
 .a-path {
   fill: none;
-  stroke-width: 2.5px;
+  stroke-width: 1.5px;
 }
 
 .connectors {
-  stroke-width: 2.5px;
+  stroke-width: 1.5px;
 }
 
  .micro-card {
@@ -54,4 +54,9 @@
 
 .card {
   text-align: center;
+}
+
+.solo-legend {
+  width: 100px;
+  background-color: lightgray;
 }

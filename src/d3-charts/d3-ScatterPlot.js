@@ -41,7 +41,6 @@ const create = (elem, props) => {
   gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
                       .transition().duration(1000).call(xAxis);
   gEnter.select('.y').transition().duration(1000).call(yAxis);
-  gEnter.selectAll('line') .style("stroke-dasharray", ("1, 1"));
 
   /*--------------- data points ------------------*/
   const g = svg.select('.gEnter');

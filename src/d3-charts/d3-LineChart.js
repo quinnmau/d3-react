@@ -100,6 +100,7 @@ const create = (elem, props) => {
   const circles = circlesG.selectAll('circle').data(d => {return d.values});
 
   circles.enter().append('circle')
+          .attr('class', 'connectors')
           .attr('r', 4)
           .attr('cx', d => {return xScale(d.x)})
           .attr('cy', innerH)
