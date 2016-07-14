@@ -64,8 +64,8 @@ class App extends React.Component {
               <BulletChart data={this.state.b} width={500} height={200} yVal={'id'} target={'target'} actual={'actual'} range={'range'} />
             </div>
             <div className="col-md-4">
-              <Card name={'Growth'} des={'value in percent'} number={'19.1%'} data={this.state.l}/>
-              <Card2 name={'Distribution'} des={'value in units'} number={'709'} data={this.state.c} />
+              <Card className="tile" name={'Growth'} des={'value in percent'} number={'19.1%'} data={this.state.l}/>
+
             </div>
           </div>
         </div>
@@ -74,6 +74,6 @@ class App extends React.Component {
   }
 }
 
-
+// <Card2 className="tile" name={'Distribution'} des={'value in units'} number={'709'} data={this.state.c} />
 
 ReactDOM.render(<App />, document.getElementById('app'));

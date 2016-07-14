@@ -73,7 +73,7 @@ const line = () => {
   return [
     {
       date: '2016-03-01',
-      usa: 7
+      usa: 2
       // chn: 4,
       // ger: 9
     },
@@ -85,7 +85,19 @@ const line = () => {
     },
     {
       date: '2016-05-31',
-      usa: 10
+      usa: 6
+      // chn: 9,
+      // ger: 7
+    },
+    {
+      date: '2016-06-11',
+      usa: 11
+      // chn: 9,
+      // ger: 7
+    },
+    {
+      date: '2016-06-31',
+      usa: 12
       // chn: 9,
       // ger: 7
     }
