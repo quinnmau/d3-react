@@ -25,6 +25,17 @@ const create = (el, props) => {
         .attr('height', 18)
         .attr('fill', d => {return color(d[props.dep])});
 
+  const checks = g.selectAll('.check').data(props.data);
+
+  checks.enter().append('path')
+        .attr('d', function(d, i) {
+          return 'M 3 9 L 9 15 L 15 3';
+        })
+        .attr('class', 'check')
+        .attr('fill', 'none')
+        .attr('stroke', 'white')
+        .attr('stroke-width', 2);
+
   const text = g.selectAll('text').data(props.data);
 
   text.enter().append('text')
