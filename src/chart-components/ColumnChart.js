@@ -15,6 +15,7 @@ class ColumnChart extends React.Component {
   componentDidMount() {
     //component globals
     const data = this.props.data;
+    console.log(data);
     const width = this.props.width;
     const height = this.props.height;
     const margin = {

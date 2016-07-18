@@ -34,20 +34,20 @@ const column = () => {
     {
       name: 'steve',
       freq1: 12,
-      freq2: 10
-      // freq3: 14
+      freq2: 10,
+      freq3: 14
     },
     {
       name: 'earl',
       freq1: 9,
-      freq2: 13
-      // freq3: 15
+      freq2: 13,
+      freq3: 15
     },
     {
       name: 'jimi',
       freq1: 15,
-      freq2: 12
-      // freq3: 6
+      freq2: 12,
+      freq3: 6
     }
   ];
 }

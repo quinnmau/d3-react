@@ -60,3 +60,12 @@
   width: 200px;
   background-color: lightgray;
 }
+
+.check-label {
+  vertical-align: middle;
+  line-height: inherit;
+}
+
+.shared-legend {
+  text-align: center;
+}
