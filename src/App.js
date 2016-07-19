@@ -29,24 +29,20 @@ class App extends React.Component {
                   cYVal: ['freq1', 'freq2', 'freq3'], change: this.changeData};
   }
 
-  changeData(stuff) {
-    this.setState({c: this.stuff});
-    console.log(this.state);
-  }
-
   render() {
     return (
       <div>
         <div className="billboard bg-light">
           <h1>Data Visualization</h1>
         </div>
-
-        <LegComp data={this.state.c} yVal={this.state.cYVal} changeState={this.state.change}/>
+        <LegComp data={this.state.c} yVal={this.state.cYVal} />
         <ColumnChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={this.state.cYVal} title={'This is a title'} />
       </div>
     );
   }
 }
+
+
 // <Legend data={this.state.c} width={100} height={100} dep={'name'} yVal={['freq1', 'freq2', 'freq3']} />
 // <Card2 className="tile" name={'Distribution'} des={'value in units'} number={'709'} data={this.state.c} />
 // <div className="container-fluid">
