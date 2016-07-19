@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#ffcf3z']);
+import CheckText from './CheckText';
 
 class LegComp extends React.Component {
+  //set state of data. Initially all checkboxes are checked data is unfilitered
+  constructor() {
+    super();
+    this.state = {data: this.props.data};
+  }
+
   render() {
     return (
       <div className="shared-legend">
         {this.props.yVal.map((item) => {
-          console.log(item);
-          return <div className="legend-item"><input type="checkbox" value={item} className="checkbox" style={{backgroundColor: color(item)}} /> <span className="check-label">{item}</span></div>
+          return <CheckText value={item} />
         })}
       </div>
     )

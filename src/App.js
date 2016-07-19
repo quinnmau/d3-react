@@ -26,9 +26,13 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {s: scatterData, c: columnData, l: lineData, b: bulletData, n: nutData,
-                  cYVal: ['freq1', 'freq2', 'freq3']};
+                  cYVal: ['freq1', 'freq2', 'freq3'], change: this.changeData};
   }
 
+  changeData(stuff) {
+    this.setState({c: this.stuff});
+    console.log(this.state);
+  }
 
   render() {
     return (
@@ -37,7 +41,7 @@ class App extends React.Component {
           <h1>Data Visualization</h1>
         </div>
 
-        <LegComp data={this.state.c} yVal={this.state.cYVal}/>
+        <LegComp data={this.state.c} yVal={this.state.cYVal} changeState={this.state.change}/>
         <ColumnChart data={this.state.c} width={500} height={500} xVal={'name'} yVal={this.state.cYVal} title={'This is a title'} />
       </div>
     );

@@ -15,7 +15,6 @@ class ColumnChart extends React.Component {
   componentDidMount() {
     //component globals
     const data = this.props.data;
-    console.log(data);
     const width = this.props.width;
     const height = this.props.height;
     const margin = {
@@ -76,7 +75,6 @@ class ColumnChart extends React.Component {
     const color = d3.scale.ordinal().range(['#297DFD', '#94BEFE']);
     if (this.props.yVal.length > 2) {
       color.range(['#2975E9', '#F7922E', '#37DAD3', '#43B649']);
-      console.log(color.range());
     }
 
     //y scale
