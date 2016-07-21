@@ -34,12 +34,11 @@ class LowerDash extends React.Component {
   }
 
   render() {
-    console.log(this.state.checks);
-    console.log(this.state.currY);
     return (
       <div>
-        {/* as many charts as client wants displayed*/}
+        {/*left chart*/}
         <LegendComp yVal={this.props.yVal} checkHandle={this._checkHandler}/>
+        {/*right chart*/}
       </div>
     )
   }
