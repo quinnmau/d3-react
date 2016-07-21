@@ -13,8 +13,7 @@ import SparklineChart from './chart-components/SparklineChart';
 import Card2 from './cards/Card2';
 import BulletChart from './chart-components/BulletChart';
 import DonutChart from './chart-components/DonutChart';
-import Legend from './chart-components/Legend';
-import LegComp from './chart-components/LegComp';
+import LowerDash from './Dashboard/LowerDash';
 
 const scatterData = scatter();
 const columnData = column();
@@ -35,6 +34,7 @@ class App extends React.Component {
         <div className="billboard bg-light">
           <h1>Data Visualization</h1>
         </div>
+        <LowerDash data={this.state.c} xVal={'name'} yVal={this.state.cYVal} />
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-4">
