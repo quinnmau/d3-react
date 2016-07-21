@@ -1,6 +1,6 @@
 import React from 'react';
 
-class CheckBox extends React.Component {
+class Checkbox extends React.Component {
   constructor() {
     super();
     this.clickHandle = this.clickHandle.bind(this);
@@ -9,6 +9,7 @@ class CheckBox extends React.Component {
 
   //handles change to checkbox
   clickHandle() {
+    this.props.checkHandle(this.props.value, !this.state.isChecked);
     this.setState({isChecked: !this.state.isChecked});
   }
 
@@ -19,4 +20,4 @@ class CheckBox extends React.Component {
   }
 }
 
-export default CheckBox;
+export default Checkbox;

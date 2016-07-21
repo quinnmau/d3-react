@@ -1,9 +1,9 @@
 import React from 'react';
-//import checkbox Component
+import Checkbox from './Checkbox';
 
 const LegendItem = (props) =>
   <div>
-    {/* checkbox compoennt*/}
+    <Checkbox value={props.value} checkHandle={props.checkHandle}/>
     <span>{props.value}</span>
   </div>
 

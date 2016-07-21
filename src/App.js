@@ -35,7 +35,7 @@ class App extends React.Component {
           <h1>Data Visualization</h1>
         </div>
         <LowerDash data={this.state.c} xVal={'name'} yVal={this.state.cYVal} />
-        <div className="container-fluid">
+        {/*<div className="container-fluid">
           <div className="row">
             <div className="col-md-4">
               <DonutChart data={this.state.n} indy={'name'} dep={'population'} width={250} height={250} title={'Sales'}/>
@@ -69,7 +69,7 @@ class App extends React.Component {
               <Card className="tile" name={'Growth'} des={'value in percent'} number={'19.1%'} data={this.state.l}/>
             </div>
           </div>
-        </div>
+        </div>*/}
       </div>
     );
   }
