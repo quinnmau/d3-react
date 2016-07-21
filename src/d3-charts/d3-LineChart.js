@@ -73,8 +73,6 @@ const create = (elem, props) => {
 
   const g = svg.select('.gEnter');
 
-  console.log(deps);
-
   const paths = g.selectAll('.a-path').data(deps);
 
   paths.enter().append('path')

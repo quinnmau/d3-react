@@ -80,9 +80,23 @@ class StackedColumnChart extends React.Component {
                     .attr('class', 'groups')
                     .attr('transform', d => {return 'translate(' + xScale(d[vars.xVal]) + ', 0)'});
 
-    const segs = groups.selectAll('rect').data(d => {return d.segments});
+    const backSegs = groups.selectAll('rect').data(d => {return d.segments});
+
+    backSegs.enter().append('rect')
+        .attr('x', d => {return xScale(d[vars.xVal])})
+        .attr('y', d => {return yScale(d.y0)})
+        .attr('width', xScale.rangeBand())
+        .attr('height', 0)
+        .attr('fill', 'white');
+
+    backSegs.transition().delay(function(d, i) {return i * 330}).duration(330)
+            .attr('y', d => {return yScale(d.y1)})
+            .attr('height', d => {return yScale(d.y0) - yScale(d.y1)});
+
+    const segs = groups.selectAll('.rect').data(d => {return d.segments});
 
     segs.enter().append('rect')
+        .attr('class', 'rect')
         .attr('x', d => {return xScale(d[vars.xVal])})
         .attr('y', d => {return yScale(d.y0)})
         .attr('width', xScale.rangeBand())

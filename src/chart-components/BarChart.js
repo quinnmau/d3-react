@@ -63,11 +63,7 @@ class BarChart extends React.Component {
     const yGroups = globals.data.map(d => {return d[globals.yVal]});
     const groupScale = this.getGroupScale(innerH).domain(yGroups);
 
-    const color = d3.scale.ordinal().range(['#297DFD', '#94BEFE']);
-    if (globals.xVal.length > 2) {
-      color.range(['#2975E9', '#F7922E', '#37DAD3', '#43B649']);
-      console.log(color.range());
-    }
+    const color = d3.scale.ordinal().range(['#2975E9', '#F7922E', '#37DAD3', '#43B649']);
 
     //within group scale
     const yValues = globals.xVal.map(d => {return d});
@@ -109,9 +105,24 @@ class BarChart extends React.Component {
           .attr('transform', d => {return 'translate(0, ' + groupScale(d[globals.yVal]) + ')'});
 
     // //actual data bars
-    const bars = groups.selectAll('rect').data(d => {return d.groupDetails});
+    const backBars = groups.selectAll('rect').data(d => {return d.groupDetails});
+
+    backBars.enter().append('rect')
+        .attr('x', 0)
+        .attr('y', d => {return yScale(d.name)})
+        .attr('width', 0)
+        .attr('height', yScale.rangeBand())
+        .attr('fill', 'white');
+
+    backBars.exit().remove();
+
+    backBars.transition().duration(1000)
+        .attr('width', d => {return xScale(d.value)});
+
+    const bars = groups.selectAll('.rect').data(d => {return d.groupDetails});
 
     bars.enter().append('rect')
+        .attr('class', 'rect')
         .attr('x', 0)
         .attr('y', d => {return yScale(d.name)})
         .attr('width', 0)

@@ -95,9 +95,23 @@ class StackedBarChart extends React.Component {
                       .attr('class', 'groups')
                       .attr('transform', d => {return 'translate(0, ' + yScale(d[vars.yVal]) + ')'});
 
-    const segs = stacks.selectAll('rect').data(d => {return d.segments});
+    const backSegs = stacks.selectAll('rect').data(d => {return d.segments});
+
+    backSegs.enter().append('rect')
+        .attr('y', d => {return yScale(d[vars.yVal])})
+        .attr('x', d => {return xScale(d.x0)})
+        .attr('width', 0)
+        .attr('height', yScale.rangeBand())
+        .attr('fill', 'white');
+
+    backSegs.transition().delay(function(d, i) {return i * 330}).duration(330)
+            .attr('x', d => {return xScale(d.x0)})
+            .attr('width', d => {return xScale(d.x1) - xScale(d.x0)});
+
+    const segs = stacks.selectAll('.rect').data(d => {return d.segments});
 
     segs.enter().append('rect')
+        .attr('class', 'rect')
         .attr('y', d => {return yScale(d[vars.yVal])})
         .attr('x', d => {return xScale(d.x0)})
         .attr('width', 0)
