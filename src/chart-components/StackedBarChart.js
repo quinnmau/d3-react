@@ -68,7 +68,8 @@ class StackedBarChart extends React.Component {
                     .scale(xScale)
                     .tickFormat(d3.format('.0%'))
                     .innerTickSize(-innerH)
-                    .outerTickSize(0);
+                    .outerTickSize(0)
+                    .tickPadding(10);
 
     gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
                     .transition()
@@ -78,7 +79,8 @@ class StackedBarChart extends React.Component {
     const yAxis = d3.svg.axis()
                     .orient('left')
                     .scale(yScale)
-                    .outerTickSize(0);
+                    .outerTickSize(0)
+                    .tickPadding(10);
     gEnter.select('.y')
                     .transition()
                     .duration(1000)

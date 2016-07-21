@@ -35,8 +35,8 @@ const create = (elem, props) => {
   const yScale = getYScale(innerH).domain([0, d3.max(props.data, d => {return d[props.yVal]})]);
 
   /*--------------- set axes ------------------*/
-  const xAxis = d3.svg.axis().orient('bottom').scale(xScale).innerTickSize(-innerH);
-  const yAxis = d3.svg.axis().orient('left').scale(yScale).innerTickSize(-innerW);
+  const xAxis = d3.svg.axis().orient('bottom').scale(xScale).innerTickSize(-innerH).tickPadding(10);
+  const yAxis = d3.svg.axis().orient('left').scale(yScale).innerTickSize(-innerW).tickPadding(10);
 
   gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
                       .transition().duration(1000).call(xAxis);

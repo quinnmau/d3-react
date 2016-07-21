@@ -84,13 +84,13 @@ class BarChart extends React.Component {
 
 
     /*----------set axes --------------*/
-    const xAxis = this.getXAxis(xScale).innerTickSize(-innerH);
+    const xAxis = this.getXAxis(xScale).innerTickSize(-innerH).tickPadding(10);
     gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
                        .transition()
                        .duration(1000)
                        .call(xAxis);
 
-    const yAxis = this.getYAxis(groupScale);
+    const yAxis = this.getYAxis(groupScale).tickPadding(10);
     gEnter.select('.y').transition()
                        .duration(1000)
                        .call(yAxis);

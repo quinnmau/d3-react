@@ -18,6 +18,18 @@
   shape-rendering: crispEdges;
 }
 
+.x-bullet path {
+  fill: none;
+  stroke: #F2F2F2;
+  stroke-width: 2px;
+  shape-rendering: crispEdges;
+}
+
+.x-bullet text {
+  fill: #8eafbf;
+  stroke: none;
+}
+
 .axis text {
   fill: #8eafbf;
   stroke: none;
@@ -34,11 +46,11 @@
 
 .a-path {
   fill: none;
-  stroke-width: 1.5px;
+  stroke-width: 2px;
 }
 
 .connectors {
-  stroke-width: 1.5px;
+  stroke-width: 2px;
 }
 
  .micro-card {

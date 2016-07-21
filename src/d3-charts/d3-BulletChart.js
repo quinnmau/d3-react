@@ -26,7 +26,7 @@ const create = (elem, props) => {
         .attr('height', innerH);
 
   //groups for axes and title
-  gEnter.append('g').attr('class', 'x axis');
+  gEnter.append('g').attr('class', 'x-bullet');
   gEnter.append('g').attr('class', 'y axis');
   gEnter.append('text').attr('class', 'title').attr('transform', 'translate(0, -40)').text(props.title);
 
@@ -42,7 +42,7 @@ const create = (elem, props) => {
   const xScale = d3.scale.linear().range([0, innerW]).domain([0, d3.max(xValues)]);
 
   const xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(2);
-  gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
+  gEnter.select('.x-bullet').attr('transform', 'translate(0, ' + innerH + ')')
                       .transition().duration(1000)
                       .call(xAxis);
 
