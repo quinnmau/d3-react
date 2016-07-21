@@ -72,32 +72,38 @@ const nut = () => {
 const line = () => {
   return [
     {
-      date: '2016-03-01',
-      usa: 2
+      date: '2016-03',
+      usa: 1
       // chn: 4,
       // ger: 9
     },
     {
-      date: '2016-04-15',
-      usa: 3
+      date: '2016-04',
+      usa: 1
       // chn: 11,
       // ger: 8
     },
     {
-      date: '2016-05-31',
-      usa: 6
+      date: '2016-05',
+      usa: 1
       // chn: 9,
       // ger: 7
     },
     {
-      date: '2016-06-11',
-      usa: 11
-      // chn: 9,
-      // ger: 7
-    },
-    {
-      date: '2016-06-31',
+      date: '2016-06',
       usa: 12
+      // chn: 9,
+      // ger: 7
+    },
+    {
+      date: '2016-07',
+      usa: 1
+      // chn: 9,
+      // ger: 7
+    },
+    {
+      date: '2016-08',
+      usa: 1
       // chn: 9,
       // ger: 7
     }

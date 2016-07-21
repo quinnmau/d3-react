@@ -33,9 +33,9 @@ const create = (elem, props) => {
 
   /*-------------------set scales---------------------------*/
   const xValues = props.data.map(d => {
-    return d3.time.format('%Y-%m-%d').parse(d[props.xVal]);
+    return d3.time.format('%Y-%m').parse(d[props.xVal]);
   });
-  const xScale = getXScale(innerW).domain(d3.extent(xValues, d => {return d}));
+  const xScale = getXScale(innerW - 50).domain(d3.extent(xValues, d => {return d}));
 
   const yValues = [];
   props.data.forEach(d => {
@@ -46,12 +46,12 @@ const create = (elem, props) => {
     }
   });
 
-  const yScale = getYScale(innerH).domain(d3.extent(yValues, d => {return d}));
+  const yScale = getYScale(innerH).domain([0, d3.max(yValues, d => {return d})]);
   /*-------------------set axes---------------------------*/
-  const xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(props.ticks);
+  const xAxis = d3.svg.axis().scale(xScale).orient('bottom').ticks(4);
   const yAxis = d3.svg.axis().scale(yScale).orient('left').innerTickSize(-innerW);
 
-  gEnter.select('.x').attr('transform', 'translate(0, ' + innerH + ')')
+  gEnter.select('.x').attr('transform', 'translate(25, ' + innerH + ')')
                       .transition().duration(1000)
                       .call(xAxis);
 
@@ -59,14 +59,14 @@ const create = (elem, props) => {
   /*-------------------plot data---------------------------*/
   const line = d3.svg.line()
                   // .interpolate('basis')
-                  .x(d => {return xScale(d.x)})
+                  .x(d => {return xScale(d.x) + 25})
                   .y(d => {return yScale(d.y)});
 
   const deps = d3.keys(props.data[0]).filter(key => {return key !== props.xVal}).map(name => {
     return {
       name: name,
       values: props.data.map(a => {
-        return {x: d3.time.format('%Y-%m-%d').parse(a[props.xVal]), y: +a[name], name: name};
+        return {x: d3.time.format('%Y-%m').parse(a[props.xVal]), y: +a[name], name: name};
       })
     };
   });
@@ -80,7 +80,7 @@ const create = (elem, props) => {
         .attr('d', d => {
           let arr = [];
           for (let i = 0; i < d.values.length; i++) {
-            let obj = {x: d.values[i].x, y: d3.min(yValues)};
+            let obj = {x: (+d.values[i].x), y: d3.min(yValues)};
             arr.push(obj);
           }
           return line(arr);
@@ -100,7 +100,7 @@ const create = (elem, props) => {
   circles.enter().append('circle')
           .attr('class', 'connectors')
           .attr('r', 4)
-          .attr('cx', d => {return xScale(d.x)})
+          .attr('cx', d => {return xScale(+d.x) + 25})
           .attr('cy', innerH)
           .attr('fill', 'white')
           .style('stroke', d => {return color(d.name)});
