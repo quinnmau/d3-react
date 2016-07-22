@@ -1,6 +1,6 @@
 import React from 'react';
 import LegendComp from './LegendComp';
-//import charts to display
+import ColumnChart from '../chart-components/ColumnChart';
 
 class LowerDash extends React.Component {
   constructor(props) {
@@ -35,10 +35,18 @@ class LowerDash extends React.Component {
 
   render() {
     return (
-      <div>
-        {/*left chart*/}
-        <LegendComp yVal={this.props.yVal} checkHandle={this._checkHandler}/>
-        {/*right chart*/}
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <ColumnChart data={this.state.data} width={500} height={500} xVal={'name'} yVal={this.state.currY} title={'This is a title'} />
+          </div>
+          <div className="col-xs-2 col-sm-2 col-md-2 col-lg-2 center-piece">
+            <LegendComp yVal={this.props.yVal} checkHandle={this._checkHandler}/>
+          </div>
+          <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <ColumnChart data={this.state.data} width={500} height={500} xVal={'name'} yVal={this.state.currY} title={'This is a title'} />
+          </div>
+        </div>
       </div>
     )
   }

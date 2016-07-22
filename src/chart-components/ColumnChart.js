@@ -71,8 +71,11 @@ class ColumnChart extends React.Component {
     data.forEach(d => {
       d.groupDetails = xValues.map(name => {return {name: name, value: +d[name]}});
     });
+    console.log(data);
 
-    const color = d3.scale.ordinal().range(['#2975E9', '#F7922E', '#37DAD3', '#43B649']);
+    const color = d3.scale.ordinal().range(['#2975E9', '#F7922E', '#3ED6CF', '#B35CFF', '#43B649', '#B7661A']).domain(this.props.yVal);
+    const color2 = d3.scale.ordinal().range(['#8EB7F4', '#FFC387', '#ADE4E1', '#D3BAE9', '#9DE0A0', '#D6AF8B']).domain(this.props.yVal);
+    console.log(color('freq3'));
 
     //y scale
     const yScale = d3.scale.linear()
@@ -102,32 +105,16 @@ class ColumnChart extends React.Component {
             .attr('class', 'groups')
             .attr('transform', d => {return 'translate(' + groupScale(d[this.props.xVal]) + ', 0)'});
 
-    //background bars for highlighting
-    const backBars = groups.selectAll('rect').data(d => {return d.groupDetails});
-
-    backBars.enter().append('rect')
-        .attr('x', d => {return xScale(d.name)})
-        .attr('y', innerH)
-        .attr('class', 'bars')
-        .attr('width', xScale.rangeBand())
-        .attr('height', 0)
-        .attr('fill', 'white');
-
-    backBars.exit().remove();
-
-    backBars.transition().duration(1000)
-        .attr('y', d => {return yScale(d.value)})
-        .attr('height', d => {return (innerH - yScale(d.value))});
-
     const bars = groups.selectAll('.rect').data(d => {return d.groupDetails});
 
     bars.enter().append('rect')
         .attr('x', d => {return xScale(d.name)})
         .attr('y', innerH)
-        .attr('class', 'bars rect')
+        .attr('class', 'rect')
         .attr('width', xScale.rangeBand())
-        .attr('height', 0)
-        .attr('fill', d => {return color(d.name)});
+        .attr('height', 0);
+
+    bars.attr('fill', d => {return color(d.name)});
 
     bars.exit().remove();
 
@@ -135,13 +122,13 @@ class ColumnChart extends React.Component {
         .attr('y', d => {return yScale(d.value)})
         .attr('height', d => {return (innerH - yScale(d.value))});
 
-    bars.on('mouseover', function() {
-      bars.attr('opacity', 0.5);
-      d3.select(this).attr('opacity', 1.0);
+    bars.on('mouseover', function(d) {
+      bars.attr('fill', d => {return color2(d.name)});
+      d3.select(this).attr('fill', color(d.name));
     });
 
-    bars.on('mouseout', function() {
-      bars.attr('opacity', 1.0);
+    bars.on('mouseout', function(d) {
+      bars.attr('fill', d => {return color(d.name)});
     });
 
     const legend = g.selectAll('.legend').data(xValues);
@@ -183,7 +170,7 @@ class ColumnChart extends React.Component {
       right: 100,
       top: 75
     };
-    const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#ffcf3z']);
+    const color = d3.scale.ordinal().range(['#2975E9', '#37dad3', '#fd810e', '#ffcf3z']).domain(this.props.yVal);
     const innerW = width - margin.left - margin.right;
     const innerH = height - margin.top - margin.bottom;
 
@@ -203,6 +190,8 @@ class ColumnChart extends React.Component {
     data.forEach(d => {
       d.groupDetails = xValues.map(name => {return {name: name, value: +d[name]}});
     });
+    console.log('update');
+    console.log(data);
 
     const yScale = d3.scale.linear()
                     .domain([0, d3.max(data, d => {return d3.max(d.groupDetails, d => {return d.value})})])
@@ -228,12 +217,13 @@ class ColumnChart extends React.Component {
     groups.transition().duration(1000)
             .attr('transform', d => {return 'translate(' + groupScale(d[this.props.xVal]) + ', 0)'});
 
-    const bars = groups.selectAll('rect').data(d => {return d.groupDetails});
+    const bars = groups.selectAll('.rect').data(d => {return d.groupDetails});
 
     //make bars transition out!!!!!!!!!!!!!!!!
     bars.exit().transition().duration(1000).attr('height', 0).attr('y', innerH).remove();
 
     bars.enter().append('rect')
+        .attr('class', 'rect')
         .attr('height', 0)
         .attr('y', innerH);
 
@@ -242,7 +232,6 @@ class ColumnChart extends React.Component {
     bars.transition().duration(1000)
       .attr('x', d => {return xScale(d.name)})
       .attr('y', d => {return yScale(d.value)})
-      .attr('class', 'bars')
       .attr('width', xScale.rangeBand())
       .attr('height', d => {return (innerH - yScale(d.value))})
       .attr('fill', d => {return color(d.name)});
