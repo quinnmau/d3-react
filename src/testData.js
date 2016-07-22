@@ -79,7 +79,7 @@ const line = () => {
     },
     {
       date: '2016-04',
-      usa: 1
+      usa: 0
       // chn: 11,
       // ger: 8
     },
@@ -97,7 +97,7 @@ const line = () => {
     },
     {
       date: '2016-07',
-      usa: 1
+      usa: 0
       // chn: 9,
       // ger: 7
     },

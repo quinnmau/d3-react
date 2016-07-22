@@ -50,7 +50,7 @@ const create = (elem, props) => {
   circles.enter().append('circle')
           .attr('cx', d => {return xScale(d[props.xVal])})
           .attr('cy', innerH)
-          .attr('r', 10)
+          .attr('r', 7)
           .attr('opacity', 0)
           .attr('fill', '#2975E9');
 

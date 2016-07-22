@@ -61,7 +61,7 @@ class ColumnChart extends React.Component {
     //group scale
     /* format x values to start with capitals */
     const xGroups = data.map(d => {return d[this.props.xVal]});
-    const groupScale = d3.scale.ordinal().rangeRoundBands([0, innerW], 0.2).domain(xGroups);
+    const groupScale = d3.scale.ordinal().rangeRoundBands([0, innerW], 0.4).domain(xGroups);
 
     //within group scale
     const xValues = this.props.yVal.map(d => {return d});
